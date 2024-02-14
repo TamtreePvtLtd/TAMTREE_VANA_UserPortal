@@ -1,27 +1,22 @@
-
 import CommonPage from "../../common/component/commonpages/CommonPage";
-import { useGetAllItemsByCollectionName } from "../../hooks/CustomRQHooks";
+import { jewelryCollections } from "../../seed-data/seed-data";
 
 const NewArrivals = () => {
-  const {
-    data: BraceletsCollection,
-    isLoading,
-    isError,
-  } = useGetAllItemsByCollectionName("Bracelets");
+  const collectionName = "Bracelets";
+  const collectionData = jewelryCollections.find(
+    (collection) => collection.name === collectionName
+  );
 
   return (
     <>
-      {BraceletsCollection && (
-        <CommonPage
-          JewelleryCollectionName={BraceletsCollection.JewelleryCollectionName}
-          JewelleryCollectionDescription={
-            BraceletsCollection.JewelleryCollectionDescription || ""
-          }
-          jewelleryItems={BraceletsCollection.jewelleryItems || []}
-        />
-      )}
+      <CommonPage
+        JewelleryCollectionName={collectionName}
+        JewelleryCollectionDescription={collectionData?.description || ""}
+        jewelleryItems={collectionData?.products || []}
+      />
     </>
   );
 };
+
 
 export default NewArrivals;

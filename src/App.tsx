@@ -6,25 +6,26 @@ import Home from "./pages/home/Home";
 import Bracelates from "./pages/bracelets/Bracelates";
 import EarRings from "./pages/earrings/EarRings";
 import Necklaces from "./pages/necklaces/Necklaces";
-import BestSelller from "./pages/bestseller/BestSeller";
+
 import FAQ from "./pages/faqabout/FAQ";
 import { paths } from "./routes/path";
 import Login from "./common/Login";
-import Signup from "./common/Signup";
-import { productDetails } from "./seed-data/seed-data";
 import ProductDetail from "./common/ProductDetail";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SnackBarProvider from "./context/SnackBarContext";
 import CustomSnackBar from "./common/CustomSnackBar";
 import NewArrivals from "./pages/newarrivals/NewArrivals";
 
-const queryClient = new QueryClient();
+import AuthProvider from "./context/AuthContext";
+import BestSelller from "./pages/bestseller/BestSelller";
+
+export const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <SnackBarProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Routes>
               <Route path={paths.ROOT} element={<Layout />}>
@@ -39,17 +40,16 @@ function App() {
                   path={paths.LOGIN}
                   element={<Login requiredHeading={true} />}
                 />
-                <Route
+                {/* <Route
                   path={paths.SIGNUP}
                   element={<Signup requiredHeading={true} />}
-                />
+                /> */}
               </Route>
               <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
             </Routes>
           </BrowserRouter>
-          <CustomSnackBar />
-        </SnackBarProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

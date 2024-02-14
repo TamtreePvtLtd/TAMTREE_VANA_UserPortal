@@ -70,9 +70,9 @@ const CommonPage = (props: Icommonpage) => {
           }}
         >
           <Typography variant="h5" gutterBottom>
-            {jewelleryItemWithCollection?.JewelleryCollectionName ||
-              "Collection Name"}
+            {jewelleryItemWithCollection?.JewelleryCollectionName}
           </Typography>
+          {jewelleryItemWithCollection?.JewelleryCollectionDescription && (
           <IconButton
             onClick={handleExpandClick}
             aria-expanded={expandDescription}
@@ -86,6 +86,7 @@ const CommonPage = (props: Icommonpage) => {
           >
             <ExpandMoreIcon />
           </IconButton>
+          )}
         </Box>
         <Collapse
           in={expandDescription}
@@ -94,8 +95,7 @@ const CommonPage = (props: Icommonpage) => {
           sx={{ margin: "25px" }}
         >
           <Typography>
-            {jewelleryItemWithCollection?.JewelleryCollectionDescription ||
-              "No description available"}
+            {jewelleryItemWithCollection?.JewelleryCollectionDescription}
           </Typography>
         </Collapse>
       </Box>
