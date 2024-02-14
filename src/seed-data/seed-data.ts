@@ -29,7 +29,7 @@ export const jewelryCollections: Collection[] = [
     products: [
       {
         _id: "p21",
-        type: "bracelet", // Added type property
+        type: "bracelet",
         posterURL: "/assets/Images to Shruthi/Bracelets/FCSOO4/1.jpg",
         images: ["/assets/Images to Shruthi/Bracelets/FCSOO4/2.jpg"],
         title: "Charm Bracelet",
@@ -37,7 +37,7 @@ export const jewelryCollections: Collection[] = [
           "Create your own unique style with this customizable charm bracelet.",
         price: 129.99,
       },
-      // Add other products similarly
+     
     ],
   },
 ];
