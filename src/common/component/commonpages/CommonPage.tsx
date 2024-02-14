@@ -49,9 +49,9 @@ const CommonPage = (props: Icommonpage) => {
       case SortingOption.PriceHighToLow:
         return products.slice().sort((a, b) => b.price - a.price);
         case SortingOption.NameAZ:
-    //   return products.slice().sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', usage: 'sort' }));
-    // case SortingOption.NameZA:
-    //   return products.slice().sort((a, b) => b.title.localeCompare(a.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+      return products.slice().sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+    case SortingOption.NameZA:
+      return products.slice().sort((a, b) => b.title.localeCompare(a.title, undefined, { sensitivity: 'base', usage: 'sort' }));
     default:
       return products;
     }
