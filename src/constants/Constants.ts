@@ -1,0 +1,1 @@
+export const VANA_ITEMS="items";

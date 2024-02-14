@@ -45,7 +45,7 @@ function Footer() {
               >
                 <LocationOnIcon
                   fontSize="large"
-                  sx={{ color: theme.palette.primary.main }}
+                  sx={{ color: theme.palette.secondary.main }}
                 />
                 <Typography variant="h5"> Store Address</Typography>
                 <Typography>
@@ -65,7 +65,7 @@ function Footer() {
               <Box sx={{ my: 1, textAlign: "center" }}>
                 <ChatBubbleIcon
                   fontSize="large"
-                  sx={{ color: theme.palette.primary.main }}
+                  sx={{ color: theme.palette.secondary.main }}
                 />
                 <Typography variant="h5">General Enquiries</Typography>
                 <Typography my={1}>vana@gmail.com</Typography>
@@ -114,7 +114,7 @@ function Footer() {
               <Box sx={{ my: 1, textAlign: "center" }}>
                 <PhoneIcon
                   fontSize="large"
-                  sx={{ color: theme.palette.primary.main }}
+                  sx={{ color: theme.palette.secondary.main }}
                 />
                 <Typography variant="h5">Call us</Typography>
                 <Typography>9876543210</Typography>

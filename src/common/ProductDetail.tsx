@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Divider, IconButton } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
@@ -8,6 +8,7 @@ import { Container } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router";
 import { useProductDetailById } from "../CustomRQHooks/Hooks";
+import { CartItem } from "../interface/type";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -38,6 +39,30 @@ function ProductDetail() {
       setMainImage(productDetails.images[0]);
     }
   }, [productDetails]);
+
+  const addToCart = () => {
+    const cartItem: CartItem = {
+      _id: productId! || productDetails?._id!,
+      quantity: quantity || productDetails?.quantity!,
+      posterURL: "" || productDetails?.posterURL!,
+      title: "" || productDetails?.title!,
+      price: 0 || productDetails?.price!,
+    };
+    let existingCart: CartItem[] = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+    const existingItemIndex = existingCart.findIndex(
+      (item) => item._id === productId
+    );
+    if (existingItemIndex !== -1) {
+      existingCart[existingItemIndex].quantity += quantity;
+    } else {
+      existingCart.push(cartItem);
+    }
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    setQuantity(1);
+    console.log(existingCart);
+  };
 
   return (
     <Container>
@@ -149,7 +174,11 @@ function ProductDetail() {
                   </ButtonGroup>
                 </Box>
                 <Box sx={{ mt: 2 }}>
-                  <Button variant="contained" sx={{ width: "70%" }}>
+                  <Button
+                    variant="contained"
+                    sx={{ width: "70%" }}
+                    onClick={addToCart}
+                  >
                     Add to Cart
                   </Button>
                 </Box>
