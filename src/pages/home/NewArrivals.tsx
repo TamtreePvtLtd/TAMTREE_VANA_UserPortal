@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { getNewArrivalProductsData } from "../../services/api";
-import { Product } from "../../interface/type";
+import { IProduct } from "../../interface/type";
 import CommonProductCard from "../../common/component/commonCard/CommonProductCard";
+import { paths } from "../../routes/path";
+import { useNavigate } from "react-router";
 
 function NewArrivals() {
-  const [newArrivalProducts, setNewArrivalProducts] = useState<Product[]>([]);
+  const [newArrivalProducts, setNewArrivalProducts] = useState<IProduct[]>([]);
   const handleMouseEnter = (productId: string) => {};
   const [hoveredProductImage, setHoveredProductImage] = useState<string | null>(
     null
   );
-  const handleMouseLeave = () => {};
+  const handleMouseLeave = () => { };
+   const navigate = useNavigate();
 
   async function fetchData() {
     try {
@@ -45,17 +48,20 @@ function NewArrivals() {
           New Arrival
         </Typography>
       </Box>
+      <Box >
+        <Button variant="contained" sx={{float:"right"}} onClick={() => navigate(`${paths.NEWARRIVALS}`)}> View ALL</Button>
+      </Box>
       <Box>
         <Grid container spacing={2} justifyContent="center">
           {newArrivalProducts.map((product) => (
             <Grid item xs={12} md={3} sm={6}>
               <CommonProductCard
                 product={product}
-                onMouseEnter={(productId: string) =>
-                  handleMouseEnter(productId)
-                }
-                onMouseLeave={() => handleMouseLeave()}
-                hoveredProductImage={hoveredProductImage}
+                // onMouseEnter={(productId: string) =>
+                //   handleMouseEnter(productId)
+                // }
+                // onMouseLeave={() => handleMouseLeave()}
+                // hoveredProductImage={hoveredProductImage}
               />
             </Grid>
           ))}

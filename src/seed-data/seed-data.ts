@@ -1,4 +1,4 @@
-import {  IProductDetails } from "../interface/type";
+import {  ICollection, IProductDetails } from "../interface/type";
 
 import { Collection } from "../interface/type";
 export const productDetails: IProductDetails[] = [

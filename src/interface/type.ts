@@ -13,7 +13,7 @@ export interface IProduct {
 export interface Icommonpage{
   JewelleryCollectionDescription: string,
   JewelleryCollectionName: string,
-  jewelleryItems:IProduct[]
+  jewelleryItems:any[]
 }
 
 export interface IProductDetails {
