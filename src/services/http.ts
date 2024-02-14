@@ -4,6 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_AXIOS_BASE_URL,
   withCredentials: false, // Set the default credential configuration
+  headers: {
+    'Content-Type': 'application/json', // Specify the content type as JSON
+  }
 });
 
 const setBaseUrl = (url: string) => {
