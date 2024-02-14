@@ -103,21 +103,21 @@ const httpWithoutCredentials = {
   get: <T>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> => axiosInstance.get<T>(url, config),
+  ): Promise<AxiosResponse<T>> => axiosInstance.get<T>(url, { ...config, ...withoutCredentialsConfig }),
   post: <T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> => axiosInstance.post<T>(url, data, config),
+  ): Promise<AxiosResponse<T>> => axiosInstance.post<T>(url, data, { ...config, ...withoutCredentialsConfig }),
   delete: <T>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> => axiosInstance.delete<T>(url, config),
+  ): Promise<AxiosResponse<T>> => axiosInstance.delete<T>(url, { ...config, ...withoutCredentialsConfig }),
   update: <T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> => axiosInstance.put<T>(url, data, config),
+  ): Promise<AxiosResponse<T>> => axiosInstance.put<T>(url, data, { ...config, ...withoutCredentialsConfig }),
 };
 
 const httpWithMultipartFormData = axiosInstance;

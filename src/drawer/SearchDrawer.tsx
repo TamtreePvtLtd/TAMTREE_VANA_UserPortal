@@ -1,4 +1,3 @@
-import SearchIcon from "@mui/icons-material/Search";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";

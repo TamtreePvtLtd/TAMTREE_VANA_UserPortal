@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#754a39",
+      main: "#ffffff",
     },
     secondary: {
       main: "#0f0e0f",
@@ -13,17 +13,17 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         outlined: {
-          color: "white",
+          color: "black",
         },
         contained: {
-          color: "white",
+          color: "black",
         },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: "#754a39",
+          color: "black",
         },
       },
     },

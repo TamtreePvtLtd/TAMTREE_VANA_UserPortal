@@ -21,7 +21,7 @@ const SecondaryNavbar = () => {
         <Grid container display={"flex"}  gap={12} justifyContent="center">
           {navItems.map((item) => (
             <Grid item key={item.text} xs="auto" fontSize={"18px"}>
-              <Link href={item.link} sx={{textDecoration:"none",}} color="#ffffff">
+              <Link href={item.link} sx={{textDecoration:"none",}} color="secondary">
                 {item.text}
               </Link>
             </Grid>
