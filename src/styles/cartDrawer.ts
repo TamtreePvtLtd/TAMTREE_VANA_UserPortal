@@ -19,6 +19,10 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  posterImage: {
+    width: "50px", // Adjust size as needed
+    height: "50px", // Adjust size as needed
+  },
 }));
 
 export default useStyles;
