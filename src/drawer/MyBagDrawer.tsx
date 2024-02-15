@@ -9,10 +9,13 @@ import axios from "axios";
 
 import useStyles from "../styles/cartDrawer";
 import { CartItem, MyBagDrawerProps } from "../interface/type";
+import { useNavigate } from "react-router";
 
 const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   const classes = useStyles();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
+  const [activeStep, setActiveStep] = useState(0); // Set the initial active step for the vertical stepper
 
   useEffect(() => {
     const fetchCartDetails = async () => {
@@ -96,6 +99,11 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
 
+  const handleProceedToCheckout = () => {
+    setActiveStep(0);
+    navigate("/verticalStepper"); 
+  };
+
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
       <Grid
@@ -155,7 +163,11 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             >
               Clear Cart
             </Button>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleProceedToCheckout}
+            >
               Proceed to Checkout
             </Button>
           </>

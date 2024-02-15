@@ -14,6 +14,7 @@ import ProductDetail from "./common/ProductDetail";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import AuthProvider from "./context/AuthContext";
 import Signup from "./common/Signup";
+import VerticalStepper from "./checkout/VerticalStepper";
 
 export const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ function App() {
                 />
               </Route>
               <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
+              <Route path={paths.VERTICALSTEPPER} element={<VerticalStepper />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
