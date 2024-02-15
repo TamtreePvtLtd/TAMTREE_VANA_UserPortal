@@ -1,4 +1,4 @@
-import {  IProductDetails } from "../interface/type";
+import {  Collection, ICollection, IProductDetails } from "../interface/type";
 
 export const productDetails: IProductDetails[] = [
   {
@@ -16,6 +16,29 @@ export const productDetails: IProductDetails[] = [
       "/public/images/productposterurl.jpg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+];
+
+export const jewelryCollections: Collection[] = [
+  {
+    _id: "jc3",
+    name: "Bracelets",
+    description:
+      "Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
+   
+    products: [
+      {
+        _id: "p21",
+        type: "bracelet",
+        posterURL: "/assets/Images to Shruthi/Bracelets/FCSOO4/1.jpg",
+        images: ["/assets/Images to Shruthi/Bracelets/FCSOO4/2.jpg"],
+        title: "Charm Bracelet",
+        description:
+          "Create your own unique style with this customizable charm bracelet.",
+        price: 129.99,
+      },
+     
+    ],
   },
 ];
 

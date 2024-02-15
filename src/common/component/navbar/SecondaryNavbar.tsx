@@ -6,12 +6,13 @@ import Link from "@mui/material/Link";
 import { paths } from '../../../routes/path';
 
 const navItems = [
-    { text: 'Home', link: paths.ROOT },
-    { text: 'Earrings', link: paths.EARRINGS },
-    { text: 'Necklaces', link:paths.NECKLACES },
-    { text: 'Bracelets', link: paths.BRACELETS },
-    { text: 'Best Seller', link: paths.BESTSELLER },
-    { text: 'Aboutus', link: paths.FAQABOUT },
+  { text: "Home", link: paths.ROOT },
+  { text: "Earrings", link: paths.EARRINGS },
+  { text: "Necklaces", link: paths.NECKLACES },
+  { text: "Bracelets", link: paths.BRACELETS },
+  { text: "Best Seller", link: paths.BESTSELLER },
+  { text: "New Arrivals", link: paths.NEWARRIVALS },  
+  { text: "Aboutus", link: paths.FAQABOUT },
 ];
 
 const SecondaryNavbar = () => {
