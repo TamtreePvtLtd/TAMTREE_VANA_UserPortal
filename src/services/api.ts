@@ -1,4 +1,4 @@
-import { ICollection, ILogin, ISignUp } from "../interface/type";
+import { ICollection, ILogin, ILoginResponse, ISignUp } from "../interface/type";
 import { httpWithCredentials, httpWithoutCredentials } from "./http";
 import { IProduct } from "../interface/type";
 
@@ -57,17 +57,17 @@ const loginCredentials = async (credential: ILogin) => {
 };
 
 
-const signUpCredentials = async (credential: ISignUp) => {
+const signUp = async (credential: ISignUp) => {
   try {
-    const response = await httpWithCredentials.post<ISignUp>(
-      "/user/userregister",
+    const response = await httpWithCredentials.post<ILoginResponse>(
+      "/customer/signup",
       credential
     );
     return response.data;
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
 
-export { loginCredentials, signUpCredentials }
+export { loginCredentials, signUp };
