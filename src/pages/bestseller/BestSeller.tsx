@@ -1,19 +1,21 @@
 import CommonPage from "../../common/component/commonpages/CommonPage";
-import { jewelryCollections } from "../../seed-data/seed-data";
+import { useGetAllItemsByCollectionName } from "../../hooks/CustomRQHooks";
 
 const BestSeller = () => {
-  const collectionName = "Bracelets";
-    const collectionData = jewelryCollections.find(
-      (collection) => collection.name === collectionName
-    );
+  const { data: BestSellerCollection } =
+    useGetAllItemsByCollectionName("Best Seller");
 
   return (
     <>
-      <CommonPage
-        JewelleryCollectionName={collectionName}
-        JewelleryCollectionDescription={collectionData?.description || ""}
-        jewelleryItems={collectionData?.products || []}
-      />
+      {BestSellerCollection && (
+        <CommonPage
+          JewelleryCollectionName={BestSellerCollection.JewelleryCollectionName}
+          JewelleryCollectionDescription={
+            BestSellerCollection.JewelleryCollectionDescription || ""
+          }
+          jewelleryItems={BestSellerCollection.jewelleryItems || []}
+        />
+      )}
     </>
   );
 };
