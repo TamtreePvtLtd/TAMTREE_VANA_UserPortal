@@ -122,7 +122,13 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
         ) : (
           <>
             {cartItems.map((item) => (
-              <Grid container item key={item._id} alignItems="center">
+              <Grid container item key={item._id}>
+                <img
+                  src={item.posterURL}
+                  alt={item.title}
+                  className={classes.posterImage}
+                />
+
                 <Typography>{item.title}</Typography>
                 <Typography>{item.price}</Typography>
                 <IconButton onClick={() => handleDecrement(item._id)}>
