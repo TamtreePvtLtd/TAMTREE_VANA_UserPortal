@@ -13,6 +13,7 @@ import Login from "./common/Login";
 import ProductDetail from "./common/ProductDetail";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import AuthProvider from "./context/AuthContext";
+import Signup from "./common/Signup";
 
 export const queryClient = new QueryClient();
 
@@ -34,12 +35,12 @@ function App() {
                   path={paths.LOGIN}
                   element={<Login requiredHeading={true} />}
                 />
-                {/* <Route
+                <Route
                   path={paths.SIGNUP}
                   element={<Signup requiredHeading={true} />}
-                /> */}
-                <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
-              </Route> 
+                />
+              </Route>
+              <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
