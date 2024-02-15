@@ -12,9 +12,12 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import theme from "../theme/theme";
+import DirectionsIcon from "@mui/icons-material/Directions";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const mobilescreen = useMediaQuery("(max-width:700px)");
+    
 
   return (
     <Box sx={{ backgroundColor: "#f5f0ec" }}>
@@ -52,6 +55,19 @@ function Footer() {
                   2700 E Eldorado Pkwy, #203,
                   <br /> Little Elm - 75068
                 </Typography>
+                <Link
+                  to={`${import.meta.env.VITE_NKS_LOCATION}`}
+                  target="_blank"
+                >
+                  <Button
+                    startIcon={<DirectionsIcon />}
+                    variant="contained"
+                    size="small"
+                    sx={{ m: 1 }}
+                  >
+                    Get Direction
+                  </Button>
+                </Link>
               </Box>
             </Grid>
 
@@ -68,7 +84,7 @@ function Footer() {
                   sx={{ color: theme.palette.secondary.main }}
                 />
                 <Typography variant="h5">General Enquiries</Typography>
-                <Typography my={1}>vana@gmail.com</Typography>
+                <Typography my={1}>Jewellerybyvana@gmail.com </Typography>
                 <Box
                   sx={{
                     gap: 2,
@@ -79,7 +95,7 @@ function Footer() {
                   }}
                 >
                   <a
-                    href="mailto:vana@gmail.com"
+                    href="mailto:Jewellerybyvana@gmail.com "
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <Button
@@ -89,13 +105,17 @@ function Footer() {
                       E-mail
                     </Button>
                   </a>
-
+                  <Link
+                    to={`${import.meta.env.VITE_NKS_WHATSAPP}`}
+                    target="_blank"
+                  >
                   <Button
                     startIcon={<WhatsAppIcon sx={{ color: "#25D366" }} />}
                     variant="contained"
                   >
                     Whatsapp
-                  </Button>
+                    </Button>
+                  </Link>
                 </Box>
               </Box>
             </Grid>
@@ -117,16 +137,25 @@ function Footer() {
                   sx={{ color: theme.palette.secondary.main }}
                 />
                 <Typography variant="h5">Call us</Typography>
-                <Typography>9876543210</Typography>
+                <Typography>+1 (206) 730-8971</Typography>
                 <Box mt={1}>
+                  <Link
+                    to={`${import.meta.env.VITE_NKS_FACEBOOK}`}
+                    target="_blank"
+                  >
                   <IconButton>
                     <FacebookRoundedIcon
                       sx={{ fontSize: "2rem", color: "#1877f2" }}
                     />
-                  </IconButton>
+                    </IconButton>
+                  </Link>
+                  <Link
+                    to={`${import.meta.env.VITE_NKS_INSTAGRAM}`}
+                    target="_blank"
+                  >
                   <IconButton>
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg"
                       width="25"
                       viewBox="0 0 102 102"
                       id="instagram"
@@ -174,7 +203,8 @@ function Footer() {
                         transform="translate(-422.637 -426.196)"
                       ></path>
                     </svg>
-                  </IconButton>
+                    </IconButton>
+                  </Link>
                 </Box>
               </Box>
             </Grid>

@@ -15,14 +15,15 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import NavbarDrawer from "../../../drawer/NavBarDrawer";
 import SearchDrawer from "../../../drawer/SearchDrawer";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import vanaLogo from "../../../../public/assets/Images to Shruthi/logo/Jewellery By Vana LOGO.png";
 import MyBagDrawer from "../../../drawer/MyBagDrawer";
-import { useNavigate } from "react-router";
+
 import { paths } from "../../../routes/path";
 import { CartItem } from "../../../interface/type";
 
 const Navbar = () => {
+  const location = useLocation();
   const isMobileView = useMediaQuery("(max-width:1000px)");
 
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
@@ -158,6 +159,7 @@ const Navbar = () => {
                 <IconButton color="inherit">
                   <AccountCircleIcon onClick={moveToLogin} />
                 </IconButton>
+                <Link to={`/${paths.MY_BAG}`} style={{ textDecoration: 'none', color: location.pathname === `/${paths.MY_BAG}` ? '#754a39' : 'inherit' }}></Link>
                 <IconButton color="inherit" onClick={handleMyBagDrawerOpen}>
                   <Badge badgeContent={myBagCount} color="secondary">
                     <ShoppingBasketIcon />
