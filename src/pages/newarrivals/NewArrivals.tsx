@@ -1,19 +1,25 @@
 import CommonPage from "../../common/component/commonpages/CommonPage";
-import { jewelryCollections } from "../../seed-data/seed-data";
+import { useGetAllItemsByCollectionName } from "../../hooks/CustomRQHooks";
+
 
 const NewArrivals = () => {
-  const collectionName = "Bracelets";
-  const collectionData = jewelryCollections.find(
-    (collection) => collection.name === collectionName
-  );
+    const { data: NewArrivalsCollection } = useGetAllItemsByCollectionName(
+      "New Arrivals"
+    );
 
   return (
     <>
-      <CommonPage
-        JewelleryCollectionName={collectionName}
-        JewelleryCollectionDescription={collectionData?.description || ""}
-        jewelleryItems={collectionData?.products || []}
-      />
+      {NewArrivalsCollection && (
+        <CommonPage
+          JewelleryCollectionName={
+            NewArrivalsCollection.JewelleryCollectionName
+          }
+          JewelleryCollectionDescription={
+            NewArrivalsCollection.JewelleryCollectionDescription || ""
+          }
+          jewelleryItems={NewArrivalsCollection.jewelleryItems || []}
+        />
+      )}
     </>
   );
 };

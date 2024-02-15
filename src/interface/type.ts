@@ -121,9 +121,3 @@ export interface ISnackBarContextType {
   ) => void;
 }
 
-export interface Collection {
-  _id: string;
-  name: string;
-  description: string;
-  products: IProduct[];
-}
