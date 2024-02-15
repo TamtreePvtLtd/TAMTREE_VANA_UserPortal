@@ -7,8 +7,8 @@ function HomePageBanner() {
         <Typography
           variant="h4"
           sx={{
-            fontWeight: 600,
-            fontFamily: '"Crimson Text", serif',
+            fontWeight: 500,
+            fontFamily: "cursive",
             fontStyle: "italic",
           }}
         >
@@ -27,7 +27,10 @@ function HomePageBanner() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "90vh",
-          width: "100vw",
+          width: "100%",
+          "@media (max-width: 600px)": {
+            height: "35vh",
+          },
         }}
       ></Box>
     </>
