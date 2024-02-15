@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { getNewArrivalProductsData } from "../../services/api";
 import { IProduct } from "../../interface/type";
 import CommonProductCard from "../../common/component/commonCard/CommonProductCard";
@@ -7,7 +7,7 @@ import Slider from "react-slick";
 
 function NewArrivals() {
   const [newArrivalProducts, setNewArrivalProducts] = useState<IProduct[]>([]);
-
+  const isBelowMediumScreen = useMediaQuery("(max-width:960px)");
   async function fetchData() {
     try {
       const newArrivalProducts = await getNewArrivalProductsData();
@@ -27,13 +27,20 @@ function NewArrivals() {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplaySpeed: 2000,
-    arrows: true,
+    arrows: !isBelowMediumScreen,
 
     responsive: [
       {
-        breakpoint: 880,
+        breakpoint: 600,
         settings: {
           slidesToShow: 1.1,
+          autoplay: true,
+        },
+      },
+      {
+        breakpoint: 920,
+        settings: {
+          slidesToShow: 3.1,
           autoplay: true,
         },
       },
