@@ -19,7 +19,7 @@ const SecondaryNavbar = () => {
   return (
     <AppBar position="static" sx={{ boxShadow: 0 ,bgcolor:"primary"}}>
       <Toolbar>
-        <Grid container display={"flex"}  gap={12} justifyContent="center">
+        <Grid container display={"flex"}  gap={12} justifyContent="center" fontFamily={"cursive"}>
           {navItems.map((item) => (
             <Grid item key={item.text} xs="auto" fontSize={"18px"}>
               <Link href={item.link} sx={{textDecoration:"none",}} color="secondary">

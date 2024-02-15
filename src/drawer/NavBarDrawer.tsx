@@ -8,6 +8,7 @@ import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import IconButton from "@mui/material/IconButton";
+import { Divider } from "@mui/material";
 
 interface NavbarDrawerProps {
   open: boolean;
@@ -21,13 +22,12 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
     { text: "Necklaces", link: paths.NECKLACES },
     { text: "Bracelets", link: paths.BRACELETS },
     { text: "Best Seller", link: paths.BESTSELLER },
-    { text: "New Arrivals", link: paths.NEWARRIVALS },
     { text: "FAQ/Aboutus", link: paths.FAQABOUT },
   ];
 
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
-      <Box sx={{ width: "300px" }}>
+      <Box sx={{ width: "250px" }}>
         <Box
           sx={{
             display: "flex",
@@ -43,6 +43,7 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
             <ChevronLeftIcon />
           </IconButton>
         </Box>
+        <Divider />
         <List>
           {drawerItems.map((item, index) => (
             <ListItemButton
@@ -51,7 +52,12 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
               to={item.link}
               onClick={onClose}
             >
-              <ListItemText primary={item.text} />
+            
+                <ListItemText
+                  primary={item.text}
+                  style={{ fontFamily: "cursive" }}
+                />
+             
             </ListItemButton>
           ))}
         </List>
