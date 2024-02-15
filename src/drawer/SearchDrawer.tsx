@@ -61,7 +61,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box
         sx={{
-          width: "500px",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           p: 2,
@@ -113,7 +113,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
                       component={"img"}
                     />
                   </Grid>
-                  <Grid item xs={8}>
+                  <Grid item xs={8} sm={9}>
                     <Box>
                       <Typography sx={{ fontSize: "0.9rem" }}>
                         {product.title}
