@@ -10,6 +10,7 @@ function HomePageBanner() {
             fontWeight: 600,
             fontFamily: '"Crimson Text", serif',
             fontStyle: "italic",
+            color: "#eba460",
           }}
         >
           Shine bright, just like a diamond's light.
