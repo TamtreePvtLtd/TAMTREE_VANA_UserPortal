@@ -17,11 +17,7 @@ function Home() {
       >
         <NewArrivals />
       </Box>
-      <Box
-        sx={{
-          mb: 2,
-        }}
-      >
+      <Box>
         <AboutByVana />
       </Box>
     </>

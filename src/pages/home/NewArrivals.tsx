@@ -33,17 +33,21 @@ function NewArrivals() {
           pb: "10px",
         }}
       >
-        <Typography
-          variant="h5"
-          sx={{
-            margin: "0px 10px 0px 0px",
-            fontWeight: 800,
-            color: "black",
-            lineHeight: 2,
-          }}
-        >
-          New Arrival
-        </Typography>
+       <Typography
+    variant="h5"
+    sx={{
+      margin: "0px 10px 0px 0px",
+      fontWeight: 800,
+      color: "black",
+      lineHeight: 2,
+      fontFamily: '"Crimson Text", serif', 
+      fontStyle: "italic",
+      fontSize:"35px",
+      padding:2
+    }}
+  >
+    New Arrival
+  </Typography>
       </Box>
       <Box>
         <Grid container spacing={2} justifyContent="center">
