@@ -10,14 +10,12 @@ import FAQ from "./pages/faqabout/FAQ";
 import { paths } from "./routes/path";
 import Login from "./common/Login";
 // import Signup from "./common/Signup";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SnackBarProvider from "./context/SnackBarContext";
 import CustomSnackBar from "./common/CustomSnackBar";
 import BestSeller from "./pages/bestseller/BestSeller";
-
 import ProductDetail from "./common/ProductDetail";
-
+import NewArrivals from "./pages/newarrivals/NewArrivals";
 import AuthProvider from "./context/AuthContext";
 import Signup from "./common/Signup";
 
@@ -35,13 +33,9 @@ function App() {
                 <Route path={paths.EARRINGS} element={<EarRings />} />
                 <Route path={paths.BRACELETS} element={<Bracelates />} />
                 <Route path={paths.NECKLACES} element={<Necklaces />} />
-                <Route
-                  path={paths.BESTSELLER}
-                  element={
-                    <BestSeller  />
-                  }
-                />
+                <Route path={paths.BESTSELLER} element={<BestSeller />} />
                 <Route path={paths.FAQABOUT} element={<FAQ />} />
+                <Route path={paths.NEWARRIVALS} element={<NewArrivals />} />
                 <Route
                   path={paths.LOGIN}
                   element={<Login requiredHeading={true} />}
