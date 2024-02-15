@@ -22,11 +22,11 @@ function NewArrivals() {
   }, []);
 
   const sliderSettings = {
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplaySpeed: 2000,
+    // slidesToScroll: 1,
+    autoplay: false,
     arrows: !isBelowMediumScreen,
 
     responsive: [
@@ -34,14 +34,14 @@ function NewArrivals() {
         breakpoint: 600,
         settings: {
           slidesToShow: 1.1,
-          autoplay: true,
+          slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 920,
+        breakpoint: 820,
         settings: {
           slidesToShow: 3.1,
-          autoplay: true,
+          slidesToScroll: 1,
         },
       },
     ],
