@@ -150,11 +150,21 @@ await LoginCredentials(data)
               required
             />
             <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              sx={{ marginTop: 3 }}
-              type="submit"
+              variant="contained" 
+              sx={{ 
+                  backgroundColor: "#e17c57", 
+                  marginTop:3,
+                  color: "white", 
+                  letterSpacing: "2px",
+                borderRadius: 0, 
+                paddingX: 4,
+                  fontSize:"15px",
+                  '&:hover': {
+                      backgroundColor: "#f2733d"
+                     
+                  }
+              }}
+           fullWidth type="submit"
             >
               Login
             </Button>

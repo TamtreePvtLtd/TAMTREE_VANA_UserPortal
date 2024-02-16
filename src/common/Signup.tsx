@@ -110,11 +110,12 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
       sx={{
         width: "50%",
         border: "1px solid",
-        marginY: "20px",
+        marginY: "40px",
         padding: "10px",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
+      <Box sx={{p: "10px",}}>
       {requiredHeading && (
         <Typography
           variant="h5"
@@ -226,7 +227,21 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             />
           </Box>
         </Box>
-        <Button variant="contained" fullWidth type="submit">
+        <Button  
+    variant="contained" 
+    sx={{ 
+        backgroundColor: "#e17c57", 
+        color: "white", 
+        letterSpacing: "2px",
+      borderRadius: 0, 
+      paddingX: 4,
+        fontSize:"15px",
+        '&:hover': {
+            backgroundColor: "#f2733d"
+           
+        }
+    }}
+ fullWidth type="submit">
           Sign up
         </Button>
         <FormHelperText
@@ -248,6 +263,7 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
           </Box>
         </FormHelperText>
       </form>
+      </Box>
     </Container>
   );
 }
