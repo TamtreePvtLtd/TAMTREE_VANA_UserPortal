@@ -25,6 +25,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <SnackBarProvider>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Routes>
@@ -44,12 +45,15 @@ function App() {
                   path={paths.SIGNUP}
                   element={<Signup requiredHeading={true} />}
                 />
+
+                <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
               </Route>
-              <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
             </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </SnackBarProvider>
       </AuthProvider>
+      <CustomSnackBar />
     </QueryClientProvider>
   );
 }

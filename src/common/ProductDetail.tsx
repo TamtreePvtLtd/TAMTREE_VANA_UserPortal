@@ -5,16 +5,20 @@ import { Button } from "@mui/material";
 import { ButtonGroup } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router";
 import { useProductDetailById } from "../CustomRQHooks/Hooks";
 import { CartItem } from "../interface/type";
+import CustomSnackBar from "../common/CustomSnackBar";
+import { useSnackBar } from "../context/SnackBarContext";
+
 
 function ProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const { updateSnackBarState } = useSnackBar();
+  const [showSnackbar, setShowSnackbar] = useState(false); 
 
   const productDetailQuery = useProductDetailById(productId ?? "");
 
@@ -62,19 +66,13 @@ function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(existingCart));
     setQuantity(1);
     console.log(existingCart);
+    setShowSnackbar(true);
+    // Trigger the Snackbar using the context
+    updateSnackBarState(true, "Added to Cart Successfully", "success");
   };
 
   return (
     <Container>
-      <IconButton
-        sx={{
-          float: "left",
-          pl: 0,
-        }}
-        onClick={() => navigate(-1)}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
       <Grid container spacing={2} sx={{ marginTop: 4 }}>
         <Grid item xs={12} md={5} lg={6}>
           <Box sx={{ pb: 2 }}>
@@ -83,11 +81,11 @@ function ProductDetail() {
               // alt="product image"
               style={{
                 display: "block",
-                margin: "1px auto",
+                // margin: "1px auto",
                 borderRadius: "5px",
                 objectFit: "contain",
-                height: "auto",
-                maxWidth: "100%",
+                height: "100%",
+                maxWidth: "70%",
               }}
             />
           </Box>
@@ -176,13 +174,22 @@ function ProductDetail() {
                 <Box sx={{ mt: 2 }}>
                   <Button
                     variant="contained"
-                    sx={{ width: "70%" }}
+                    sx={{ width: "70%", marginTop: "10px" }}
                     onClick={addToCart}
                   >
                     Add to Cart
                   </Button>
+                  {showSnackbar && <CustomSnackBar />}
                 </Box>
-                <Box sx={{ marginTop: "20px" }}>
+                <Box>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: "bold", marginTop: 2 }}
+                  >
+                    Description:
+                  </Typography>
+                </Box>
+                <Box sx={{ marginTop: "8px", height: "0.5em" }}>
                   <Typography>{productDetails.description}</Typography>
                 </Box>
               </>
