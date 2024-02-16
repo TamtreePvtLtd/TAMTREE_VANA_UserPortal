@@ -16,7 +16,7 @@ const navItems = [
 
 const SecondaryNavbar = () => {
   return (
-    <AppBar position="static" sx={{ boxShadow: 0 ,bgcolor:"primary"}}>
+    <AppBar position="static" sx={{ boxShadow: 0 ,bgcolor:"primary",marginTop:"12px"}}>
       <Toolbar>
         <Grid container display={"flex"}  gap={12} justifyContent="center">
           {navItems.map((item) => (

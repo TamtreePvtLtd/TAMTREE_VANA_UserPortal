@@ -49,8 +49,9 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
     }
   }, [searchTerm, open]);
 
- const handleProductClick = (productId: string) => {
-  navigate(`${paths.PRODUCTDETAIL}/${productId}`);
+  const handleProductClick = (productId: string) => {
+   console.log('first', productId, `${paths.PRODUCTDETAIL_BASE}/${productId}`)
+  navigate(`${paths.PRODUCTDETAIL_BASE}/${productId}`);
 };
 
   return (

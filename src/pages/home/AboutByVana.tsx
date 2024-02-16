@@ -34,7 +34,7 @@ function AboutByVana() {
         <Typography variant="h4" fontWeight={"600"} fontFamily= "'Crimson Text','serif'"
       fontStyle= "italic"
       fontSize="35px">
-          About VANA
+          Jewellery by VANA
         </Typography>
         <Typography
           variant="h6"
