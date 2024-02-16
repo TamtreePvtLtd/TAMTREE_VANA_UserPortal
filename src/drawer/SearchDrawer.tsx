@@ -1,21 +1,20 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";  
 import IconButton from "@mui/material/IconButton";
 import { httpWithoutCredentials } from "../services/http";
 import { ISearchProduct } from "../interface/type";
 import { useEffect, useState } from "react";
-import { DebounceInput } from "react-debounce-input";
 import { useNavigate } from "react-router";
 import { Card, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
+import { paths } from "../routes/path";
 
 interface SearchDrawerProps {
   open: boolean;
   onClose: () => void;
 }
-
 
 const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,7 +25,6 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
     const value = event.target.value;
     setSearchTerm(value);
   };
-  ;
   const fetchSearchProduct = async () => {
     try {
       const response = await httpWithoutCredentials.get<ISearchProduct[]>(
@@ -44,49 +42,55 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
     if (searchTerm && searchTerm.trim() !== "") {
       fetchSearchProduct();
     }
-   
+
     if (!open) {
       setSearchTerm("");
       setProducts([]);
     }
   }, [searchTerm, open]);
 
- 
-
-
   const handleProductClick = (productId: string) => {
-    navigate(`productDetail/${productId}`);
-  };
+   console.log('first', productId, `${paths.PRODUCTDETAIL_BASE}/${productId}`)
+  navigate(`${paths.PRODUCTDETAIL_BASE}/${productId}`);
+};
+
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box
         sx={{
-          width: "500px",
+        width: { xs: "100%", sm: "350px" },
           display: "flex",
           alignItems: "center",
-          p: 2,
+          p: 3,
           justifyContent: "space-between",
         }}
       >
-        <DebounceInput
-          element={TextField}
-          debounceTimeout={1000}
-          fullWidth
-          sx={{
-            "& .MuiInputBase-input": {
-              padding: 1,
-            },
+        <IconButton>
+          <SearchIcon sx={{ fontSize: 32 }} />
+        </IconButton>
+        <input
+          type="text"
+          style={{
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            padding: "8px",
+            width: "100%",
+            fontFamily: '"Crimson Text", serif',
+            fontSize: "17px",
           }}
           value={searchTerm}
           onChange={(event) => handleInputChange(event)}
-          placeholder="Search product"
+          placeholder="What are you looking for?"
           autoComplete="new"
           autoFocus
         />
+
         <IconButton onClick={onClose}>
-          <ChevronLeftIcon />
+          <CloseIcon />
         </IconButton>
       </Box>
+      <Divider />
       {searchTerm.trim() !== "" && products.length > 0 ? (
         products.map((product, index) => (
           <Box key={index}>
@@ -113,7 +117,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
                       component={"img"}
                     />
                   </Grid>
-                  <Grid item xs={8}>
+                  <Grid item xs={8} sm={9}>
                     <Box>
                       <Typography sx={{ fontSize: "0.9rem" }}>
                         {product.title}

@@ -29,7 +29,7 @@ export interface IProductDetails {
 
 
 export interface ILogin {
-  phoneNumber: string;
+  email: string;
   password: string;
 }
 
@@ -91,8 +91,9 @@ export interface IAuthContext {
 
 export interface IUser {
   userId: string | null;
-  phoneNumber: string | null;
-  name: string | null;
+  email: string | null;
+  userName: string | null;
+  phoneNumber?:string | null;
 }
 
 export interface ILoginResponse {
@@ -102,7 +103,7 @@ export interface ILoginResponse {
 }
 
 export interface ISignUp {
-  phoneNumber: string | undefined;
+  phoneNumber: string | null;
   password: string;
   userName: string;
   email?: string;
@@ -120,3 +121,4 @@ export interface ISnackBarContextType {
     severity: string
   ) => void;
 }
+

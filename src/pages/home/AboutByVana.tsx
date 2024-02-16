@@ -10,8 +10,9 @@ function AboutByVana() {
   return (
     <Box
       sx={{
-        backgroundColor: "RGB(255, 229, 204)",
-        py: 2,
+        backgroundColor: " #FFE5CC",
+        py: 4,
+        marginBottom:0
       }}
     >
       <Container
@@ -25,17 +26,20 @@ function AboutByVana() {
       >
         <Typography
           my={2}
-          fontSize={matches ? "3vw" : "1vw"}
+          fontSize={matches ? "3vw" : "17px"}
           sx={{ opacity: 0.8 }}
         >
           YOU'RE REALLY PRETTY.
         </Typography>
-        <Typography variant="h4" fontWeight={"600"}>
-          About VANA
+        <Typography variant="h4" fontWeight={"600"} fontFamily= "'Crimson Text','serif'"
+      fontStyle= "italic"
+      fontSize="35px">
+          Jewellery by VANA
         </Typography>
         <Typography
           variant="h6"
-          fontSize={matches ? "3vw" : "1.2vw"}
+          fontSize={matches ? "3vw" : "17px"}
+          fontFamily= "'Crimson Text','serif'"
           sx={{ textAlign: "center", opacity: 0.8, py: 2 }}
         >
           Jewellery consists of decorative items worn for personal adornment,
@@ -49,7 +53,24 @@ function AboutByVana() {
           personal adornment, such as brooches, rings, necklaces, earrings,
           pendants, bracelets, and cufflinks.
         </Typography>
-        <Button variant="contained">Read More</Button>
+       <Button 
+    variant="contained" 
+    sx={{ 
+        backgroundColor: "#e17c57", 
+        color: "white", 
+        letterSpacing: "2px",
+      borderRadius: 0, 
+      paddingX: 4,
+        fontSize:"15px",
+        '&:hover': {
+            backgroundColor: "#f2733d"
+           
+        }
+    }}
+>
+    Read More
+</Button>
+
       </Container>
     </Box>
   );
