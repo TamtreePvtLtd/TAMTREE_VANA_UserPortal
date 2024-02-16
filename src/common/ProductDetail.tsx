@@ -6,9 +6,9 @@ import { ButtonGroup } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate, useParams } from "react-router";
-import { useProductDetailById } from "../CustomRQHooks/Hooks";
+import { useNavigate, useParams } from "react-router";;
 import { CartItem } from "../interface/type";
+import { useProductDetailById } from "../hooks/CustomRQHooks";
 
 function ProductDetail() {
   const { productId } = useParams();

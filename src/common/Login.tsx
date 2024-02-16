@@ -13,6 +13,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSnackBar } from "../context/SnackBarContext";
 import { ILogin } from "../interface/type";
 import { paths } from "../routes/path";
+import { useLogin } from "../hooks/CustomRQHooks";
+import { useAuthContext } from "../context/AuthContext";
 
 
 
@@ -23,18 +25,18 @@ interface LoginProps {
 }
 
 const schema = yup.object().shape({
-  phoneNumber: yup
+  email: yup
     .string()
-    .required("PhoneNumber is required")
     .matches(
-      /[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{1}/,
-      "Please enter a valid phone number"
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Please enter a valid email address"
     )
-    .max(10, "Phone number must be 10 digits"),
+    .required("Email is required"),
   password: yup.string().required("Password is required"),
 });
 
 function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
+  const { updateUserData } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
   const { updateSnackBarState } = useSnackBar();
@@ -42,6 +44,8 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
   const isFromNavbar = state?.fromNavbar || false;
   const isFromOrders = state?.fromOrders || false;
   const isFromSignup = state?.fromSignup || false;
+
+  const mutation = useLogin();
 
   const {
     register,
@@ -52,17 +56,32 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
     mode: "all",
   });
 
-  const handleLogin = async (data: ILogin) => {
-    try {
+ // Handle successful login
+const handleLogin = async (data: ILogin) => {
+  try {
+    const response = await mutation.mutateAsync(data); 
+    const userData = response.data;
+
+    if (userData) {
+      // Save user data in localStorage upon successful login
+      localStorage.setItem("userData", JSON.stringify(userData));
+      updateUserData(userData);
       
+      // Redirect to home page or previous location
+      navigate(paths.ROOT);
+
       if (onLogin) {
         onLogin();
       }
-    } catch (error) {
-      // Handle login error, show snackbar, etc.
-      updateSnackBarState(true, "Login failed", "error");
+    } else {
+      // Handle login response with no user data
+      updateSnackBarState(true, "Login failed: No user data returned", "error");
     }
-  };
+  } catch (error) {
+    updateSnackBarState(true, "Login failed", "error");
+  }
+};
+
 
 
   const handleRegisterLinkClick = () => {
@@ -98,16 +117,16 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
           )}
           <form onSubmit={handleSubmit(handleLogin)}>
             <Typography>
-              PhoneNumber<span style={{ color: "red" }}>*</span>
+              Email<span style={{ color: "red" }}>*</span>
             </Typography>
             <TextField
               variant="outlined"
               margin="normal"
               fullWidth
               type="tel"
-              {...register("phoneNumber")}
-              error={!!errors.phoneNumber}
-              helperText={errors.phoneNumber?.message?.toString()}
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email?.message?.toString()}
               autoComplete="new"
               required
             />

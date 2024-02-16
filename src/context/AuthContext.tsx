@@ -1,5 +1,5 @@
-import React, { useContext, ReactNode } from "react";
-import { useState, createContext, useEffect } from "react";
+import  { useContext, ReactNode } from "react";
+import { useState, createContext } from "react";
 import { IAuthContext, IUser } from "../interface/type";
 
 interface AuthProviderProps {
@@ -10,7 +10,8 @@ const AuthContext = createContext<IAuthContext>({
   user: {
     userId: null,
     phoneNumber: null,
-    name: null,
+    email:null,
+    userName: null,
   },
   updateUserData: () => {},
 });

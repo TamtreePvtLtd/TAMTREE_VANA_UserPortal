@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {  getAllItemsByCollectionName, getAllItemsById, loginCredentials, signUpCredentials } from "../services/api";
+import {  LogOut, Login, fetchProductDetailById, getAllItemsByCollectionName, getAllItemsById,  } from "../services/api";
 
 
 export const useGetAllItemsByCollectionName = (collectionName:string) => {
@@ -18,10 +18,27 @@ export const useGetAllItemsByCollectionName = (collectionName:string) => {
     });
   };
 
+  export const useProductDetailById = (productId: string) => {
+    return useQuery({
+      queryKey: ["ProductById", productId],
+      queryFn: () => fetchProductDetailById(productId),
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    });
+  };
  
   export const useLogin = () => {
     return useMutation ({
       mutationKey: ["login"],
-      mutationFn:loginCredentials,
+      mutationFn:Login,
     });
   };
+
+  export const useLogout = () => {
+    return useQuery({
+      queryKey:["logout"],
+      queryFn:LogOut
+    });
+  };
+
+  
