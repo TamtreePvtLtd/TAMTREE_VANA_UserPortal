@@ -9,15 +9,16 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 const Layout = () => {
 
   const isSmallScreen = useMediaQuery("(min-width:1000px)");
+  
   return (
     <>
-      <Nav/>
-      <Box>{isSmallScreen && <SecondaryNavbar/>}</Box>
-      <Divider/>
+      <Nav />
+      <Box>{isSmallScreen && <SecondaryNavbar />}</Box>
+      <Divider />
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      <Footer/>
+      {location.pathname === `/detail/:productId` && <Footer />}
     </>
   );
 };
