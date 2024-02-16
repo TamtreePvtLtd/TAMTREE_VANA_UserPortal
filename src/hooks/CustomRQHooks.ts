@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {  LogOut, Login, fetchProductDetailById, getAllItemsByCollectionName, getAllItemsById,  } from "../services/api";
+import {  LogOut, LoginCredentials, fetchProductDetailById, getAllItemsByCollectionName, getAllItemsById,  } from "../services/api";
 
 
 export const useGetAllItemsByCollectionName = (collectionName:string) => {
@@ -30,7 +30,7 @@ export const useGetAllItemsByCollectionName = (collectionName:string) => {
   export const useLogin = () => {
     return useMutation ({
       mutationKey: ["login"],
-      mutationFn:Login,
+      mutationFn:LoginCredentials,
     });
   };
 

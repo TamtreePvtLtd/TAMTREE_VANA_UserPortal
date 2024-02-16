@@ -13,8 +13,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSnackBar } from "../context/SnackBarContext";
 import { ILogin } from "../interface/type";
 import { paths } from "../routes/path";
-import { useLogin } from "../hooks/CustomRQHooks";
 import { useAuthContext } from "../context/AuthContext";
+import { LoginCredentials } from "../services/api";
 
 
 
@@ -45,7 +45,6 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
   const isFromOrders = state?.fromOrders || false;
   const isFromSignup = state?.fromSignup || false;
 
-  const mutation = useLogin();
 
   const {
     register,
@@ -58,28 +57,33 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
 
  // Handle successful login
 const handleLogin = async (data: ILogin) => {
-  try {
-    const response = await mutation.mutateAsync(data); 
-    const userData = response.data;
-
-    if (userData) {
-      // Save user data in localStorage upon successful login
-      localStorage.setItem("userData", JSON.stringify(userData));
-      updateUserData(userData);
-      
-      // Redirect to home page or previous location
+await LoginCredentials(data)
+.then((response) => {
+  if (response.data) {
+    updateUserData({
+      ...response.data,
+    });
+    if (isFromNavbar) {
       navigate(paths.ROOT);
-
-      if (onLogin) {
-        onLogin();
-      }
-    } else {
-      // Handle login response with no user data
-      updateSnackBarState(true, "Login failed: No user data returned", "error");
     }
-  } catch (error) {
-    updateSnackBarState(true, "Login failed", "error");
+    if (isFromOrders) {
+      navigate(`/${paths.ORDERS}`);
+    }
+    if (isFromSignup) {
+      navigate(paths.ROOT);
+    } else {
+      if (onLogin) onLogin();
+    }
+  } else {
+    updateUserData(null);
   }
+})
+.catch((error) => {
+  if (error.response && error.response.data) {
+    console.log(error.response.data);
+    updateSnackBarState(true, error.response.data.message, "error");
+  }
+});
 };
 
 
@@ -106,10 +110,11 @@ const handleLogin = async (data: ILogin) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          p: 2,
+          p: "20px",
+          
         }}
       >
-        <Box>
+        <Box sx={{border:"1px solid",p: "20px",}}>
           {requiredHeading && (
             <Typography variant="h5" align="center" gutterBottom>
               Login

@@ -55,7 +55,7 @@ export { getNewArrivalProductsData, getAllItemsByCollectionName, getAllItemsById
 
 
 
-const Login = async (login:ILogin) => {
+const LoginCredentials = async (login:ILogin) => {
   try {
     const response = await httpWithCredentials.post<ILoginResponse>("/customer/login", login);
     return response.data;
@@ -100,4 +100,4 @@ const signUp = async (credential: ISignUp) => {
 };
 
 
-export {  signUp,Login,LogOut,isAuthorized };
+export {  signUp,LoginCredentials,LogOut,isAuthorized };

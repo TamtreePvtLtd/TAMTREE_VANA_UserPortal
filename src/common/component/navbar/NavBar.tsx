@@ -28,6 +28,7 @@ import { useAuthContext } from "../../../context/AuthContext";
 import { LogOut, isAuthorized } from "../../../services/api";
 import Tooltip from "@mui/material/Tooltip";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import { useSnackBar } from "../../../context/SnackBarContext";
 
 const Navbar = () => {
   const isMobileView = useMediaQuery("(max-width:1000px)");
@@ -38,6 +39,7 @@ const Navbar = () => {
   const [myBagCount, setMyBagCount] = useState(0);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const { user, updateUserData } = useAuthContext();
+  const { updateSnackBarState } = useSnackBar();
 
   const open = Boolean(anchorEl);
   
@@ -62,6 +64,7 @@ const Navbar = () => {
       .catch((error) => {
         if (error.response && error.response.data) {
           console.log(error.response.data);
+          updateSnackBarState(true, error.response.data.message, "error");
         }
       });
   };
@@ -78,6 +81,7 @@ const Navbar = () => {
       .catch((error) => {
         if (error.response && error.response.data) {
           console.log(error.response.data);
+          updateSnackBarState(true, error.response.data.message, "error");
         }
       });
   };
@@ -110,9 +114,6 @@ const Navbar = () => {
     navigate(`/${paths.LOGIN}`, { state: { fromNavbar: true } });
   };
 
-  useEffect(() => {
-    checkIsAuthorized();
-  }, []);
 
   useEffect(() => {
     const cartItems: CartItem[] = JSON.parse(
@@ -123,6 +124,10 @@ const Navbar = () => {
       totalQuantity += item.quantity;
     }
     setMyBagCount(cartItems.length);
+  }, []);
+
+  useEffect(() => {
+    checkIsAuthorized();
   }, []);
 
   return (

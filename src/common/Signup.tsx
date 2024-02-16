@@ -45,7 +45,10 @@ const schema = yup.object().shape({
     .string()
     .required("confirm Password is required")
     .oneOf([yup.ref("password")], "Passwords must match"),
-  email: yup.string().email("Please enter a valid email"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email"),
   userName: yup.string().required("Please enter Name"),
 });
 
@@ -83,6 +86,7 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             if (!isNavbarLogin && !isOrderLogin && !isSignupLogin) {
               if (onSign) onSign();
             } else {
+              navigate(paths.ROOT);
             }
           }
         })
@@ -102,7 +106,15 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
   };
 
   return (
-    <Container sx={{ width: "50%" }}>
+    <Container
+      sx={{
+        width: "50%",
+        border: "1px solid",
+        marginY: "20px",
+        padding: "10px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       {requiredHeading && (
         <Typography
           variant="h5"
@@ -122,6 +134,7 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             <TextField
               id="outlined-basic"
               variant="outlined"
+              margin="normal"
               fullWidth
               inputProps={{ style: { padding: "10px" } }}
               {...register("userName")}
@@ -131,6 +144,7 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
                 sx: { color: "red", marginLeft: "0px" },
               }}
               autoComplete="new"
+              type="text"
             />
           </Box>
           <Box sx={{ padding: "7px 0" }}>
@@ -154,19 +168,23 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             />
           </Box>
           <Box sx={{ padding: "7px 0" }}>
-            <Typography padding="5px 0px">Email</Typography>
+            <Typography padding="5px 0px">
+              Email<span style={{ color: "red" }}>*</span>
+            </Typography>
             <TextField
               id="outlined-basic"
               variant="outlined"
+              margin="normal"
               fullWidth
-              type="email"
               inputProps={{ style: { padding: "10px" } }}
               {...register("email")}
+              error={!!errors.email}
               helperText={errors.email?.message?.toString()}
               FormHelperTextProps={{
                 sx: { color: "red", marginLeft: "0px" },
               }}
               autoComplete="new"
+              type="email"
             />
           </Box>
           <Box sx={{ padding: "7px 0" }}>
@@ -176,13 +194,16 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             <TextField
               id="outlined-basic"
               variant="outlined"
+              margin="normal"
               fullWidth
               inputProps={{ style: { padding: "10px" } }}
               {...register("password")}
               type="password"
               error={!!errors.password}
               helperText={errors.password?.message?.toString()}
-              FormHelperTextProps={{ sx: { margin: "0px" } }}
+              FormHelperTextProps={{
+                sx: { color: "red", marginLeft: "0px" },
+              }}
             />
           </Box>
           <Box sx={{ padding: "7px 0" }}>
@@ -192,13 +213,16 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
             <TextField
               id="outlined-basic"
               variant="outlined"
+              margin="normal"
               fullWidth
               inputProps={{ style: { padding: "10px" } }}
               {...register("confirmPassword")}
               type="password"
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword?.message?.toString()}
-              FormHelperTextProps={{ sx: { margin: "0px" } }}
+              FormHelperTextProps={{
+                sx: { color: "red", marginLeft: "0px" },
+              }}
             />
           </Box>
         </Box>
@@ -209,11 +233,12 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
           onClick={moveToLogin}
           sx={{ textAlign: "center", paddingTop: "5px" }}
         >
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} fontSize="15px">
             Already have an Account?
             <br />
             Please &nbsp;
             <Link
+              sx={{ color: "blue" }}
               onClick={() => {
                 onRegisterLinkClick && onRegisterLinkClick();
               }}
