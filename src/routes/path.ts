@@ -8,6 +8,7 @@ export enum paths {
   LOGIN = "login",
   SIGNUP = "signup",
   PRODUCTDETAIL = "/detail/:productId",
-  NEWARRIVALS ="newarrivals",
-  ORDERS = "orders"
+  ORDERS = "orders",
+  PRODUCTDETAIL_BASE = "/detail",
+  NEWARRIVALS ="newarrivals"
 }

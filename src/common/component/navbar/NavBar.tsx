@@ -29,6 +29,7 @@ import { LogOut, isAuthorized } from "../../../services/api";
 import Tooltip from "@mui/material/Tooltip";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { useSnackBar } from "../../../context/SnackBarContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const isMobileView = useMediaQuery("(max-width:1000px)");
@@ -196,18 +197,20 @@ const Navbar = () => {
               justifyContent="center"
               alignItems={"center"}
             >
-              <Avatar
+              <Link to="/">
+<Avatar
                 alt="Company Logo"
                 src={vanaLogo}
                 sx={{
                   backgroundColor: "#F6F6F6",
-                  height: "100px",
-                  width: "100px",
+                  height: "150px",
+                  width: "150px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               />
+              </Link>
             </Grid>
             <Grid item xs={4} md={4}>
               <Box

@@ -17,13 +17,14 @@ const Layout = () => {
 
   return (
     <>
-      <Nav/>
-      <Box>{isSmallScreen && <SecondaryNavbar/>}</Box>
-      <Divider/>
+      <Nav />
+      <Box>{isSmallScreen && <SecondaryNavbar />}</Box>
+      <Divider />
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
       {!isLoginOrSignup && <Footer />}
+      {location.pathname === `/detail/:productId` && <Footer />}
     </>
   );
 };

@@ -44,14 +44,15 @@ function App() {
                   path={paths.SIGNUP}
                   element={<Signup requiredHeading={true} />}
                 />
+
+                <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
               </Route>
-              <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
             </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
-        <CustomSnackBar/>
+            </BrowserRouter>
+          </ThemeProvider>
         </SnackBarProvider>
       </AuthProvider>
+      <CustomSnackBar />
     </QueryClientProvider>
   );
 }
