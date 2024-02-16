@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MouseEvent } from 'react';
+import { MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -43,15 +43,14 @@ const Navbar = () => {
   const { updateSnackBarState } = useSnackBar();
 
   const open = Boolean(anchorEl);
-  
-  const handleMenuOpen = (event:MouseEvent) => {
+
+  const handleMenuOpen = (event: MouseEvent) => {
     setAnchorEl(event.currentTarget as HTMLButtonElement);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
 
   const checkIsAuthorized = async () => {
     await isAuthorized()
@@ -69,7 +68,7 @@ const Navbar = () => {
         }
       });
   };
-  
+
   const handleLogoutClick = async () => {
     await LogOut()
       .then((response) => {
@@ -114,7 +113,6 @@ const Navbar = () => {
   const moveToLogin = () => {
     navigate(`/${paths.LOGIN}`, { state: { fromNavbar: true } });
   };
-
 
   useEffect(() => {
     const cartItems: CartItem[] = JSON.parse(
@@ -198,18 +196,18 @@ const Navbar = () => {
               alignItems={"center"}
             >
               <Link to="/">
-<Avatar
-                alt="Company Logo"
-                src={vanaLogo}
-                sx={{
-                  backgroundColor: "#F6F6F6",
-                  height: "150px",
-                  width: "150px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              />
+                <Avatar
+                  alt="Company Logo"
+                  src={vanaLogo}
+                  sx={{
+                    backgroundColor: "#F6F6F6",
+                    height: "100px",
+                    width: "130px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                />
               </Link>
             </Grid>
             <Grid item xs={4} md={4}>
@@ -218,22 +216,27 @@ const Navbar = () => {
                 justifyContent="flex-end"
                 alignItems="flex-end"
               >
-               {user ? null :<IconButton color="inherit"> <AccountCircleIcon onClick={moveToLogin} /></IconButton>}
-              {user && (
-                <Tooltip title="Account settings">
-                  <IconButton
-                    onClick={handleMenuOpen}
-                    size="small"
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                  >
-                    <Avatar sx={{ width: 28, height: 28 }}>
-                      {user?.userName ? user?.userName.toUpperCase()[0] : ""}
-                    </Avatar>
+                {user ? null : (
+                  <IconButton color="inherit">
+                    {" "}
+                    <AccountCircleIcon onClick={moveToLogin} />
                   </IconButton>
-                </Tooltip>
-              )}
+                )}
+                {user && (
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleMenuOpen}
+                      size="small"
+                      aria-controls={open ? "account-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                    >
+                      <Avatar sx={{ width: 28, height: 28 }}>
+                        {user?.userName ? user?.userName.toUpperCase()[0] : ""}
+                      </Avatar>
+                    </IconButton>
+                  </Tooltip>
+                )}
                 <IconButton color="inherit" onClick={handleMyBagDrawerOpen}>
                   <Badge badgeContent={myBagCount} color="secondary">
                     <ShoppingBasketIcon />
