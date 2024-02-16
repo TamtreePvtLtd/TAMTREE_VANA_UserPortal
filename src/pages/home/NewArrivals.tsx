@@ -49,27 +49,21 @@ function NewArrivals() {
 
   return (
     <Container sx={{ py: 1 }}>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        pb={1}
-      >
-       <Typography
-    variant="h5"
-    sx={{
-      margin: "0px 10px 0px 0px",
-      fontWeight: 800,
-      color: "black",
-      lineHeight: 2,
-      fontFamily: '"Crimson Text", serif', 
-      fontStyle: "italic",
-      fontSize:"35px",
-      padding:2
-    }}
-  >
-    New Arrival
-  </Typography>
+      <Box pb={1}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 500,
+            color: "black",
+            lineHeight: 2,
+            fontFamily: "cursive",
+            fontSize: "30px",
+            padding: 2,
+            textAlign: "center",
+          }}
+        >
+          New Arrival
+        </Typography>
       </Box>
       <Box>
         <Slider {...sliderSettings}>

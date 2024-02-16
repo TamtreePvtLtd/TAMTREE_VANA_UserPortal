@@ -14,6 +14,10 @@ const Layout = () => {
   const isLoginOrSignup =
   location.pathname === `/${paths.LOGIN}` || location.pathname === `/${paths.SIGNUP}`;
 
+  const isProductDetailPage = location.pathname.startsWith(
+    `/${paths.PRODUCTDETAIL}`
+  );
+
   return (
     <>
       <Box style={{ position: "sticky", top: 0, zIndex: 1000 }}>
@@ -21,13 +25,12 @@ const Layout = () => {
       </Box>
       <Box style={{ position: "sticky", top: "110px", zIndex: 1000 }}>
         {isSmallScreen && <SecondaryNavbar />}
-        <Divider />
       </Box>
-
+      <Divider />
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      <Footer />
+      {isLoginOrSignup && isProductDetailPage && <Footer />}
     </>
   );
 };

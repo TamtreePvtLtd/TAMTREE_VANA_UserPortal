@@ -50,15 +50,15 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
   }, [searchTerm, open]);
 
   const handleProductClick = (productId: string) => {
-   console.log('first', productId, `${paths.PRODUCTDETAIL_BASE}/${productId}`)
-  navigate(`${paths.PRODUCTDETAIL_BASE}/${productId}`);
-};
+    navigate(`${paths.PRODUCTDETAIL_BASE}/${productId}`);
+    onClose();
+  };
 
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box
         sx={{
-        width: { xs: "100%", sm: "350px" },
+          width: { xs: "100%", sm: "350px" },
           display: "flex",
           alignItems: "center",
           p: 3,
@@ -95,7 +95,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
         products.map((product, index) => (
           <Box key={index}>
             <Box onClick={() => handleProductClick(product._id)}>
-              <Card sx={{ padding: 1 }} elevation={0}>
+              <Card sx={{ padding: 1 ,cursor:"pointer"}} elevation={0}>
                 <Grid
                   container
                   spacing={2}

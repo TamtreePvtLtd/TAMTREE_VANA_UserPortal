@@ -5,7 +5,7 @@ function HomePageBanner() {
     <>
       <Box sx={{ textAlign: "center", py: 2 }}>
         <Typography
-          variant="h4"
+          variant="h5"
           sx={{
             fontWeight: 500,
             fontFamily: "cursive",
