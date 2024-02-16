@@ -2,6 +2,7 @@ import useAxiosLoader from "../services/http";
 import { Box } from "@mui/material";
 import { memo } from "react";
 
+
 const Spinner = () => <div className="spinner"></div>;
 
 function Loader() {
@@ -19,7 +20,7 @@ function Loader() {
                             borderRadius: "50%",
                         }}
                         className="spinner-image"
-                        src="/public/images/2.jpg"
+                        src="public/assets/Images to Shruthi/logo/Jewellery By Vana LOGO.png"
                         alt=""
                     />
                 </Box>

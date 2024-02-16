@@ -1,4 +1,5 @@
 // EarringsPage.tsx
+import Loader from "../../common/Loader";
 import CommonPage from "../../common/component/commonpages/CommonPage";
 import { useGetAllItemsByCollectionName } from "../../hooks/CustomRQHooks";
 
@@ -11,7 +12,7 @@ const Earrings = () => {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader/>}
       {isError && <p>Error fetching collection</p>}
       {EarringsCollection && (
         <CommonPage
