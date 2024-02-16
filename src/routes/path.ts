@@ -9,4 +9,5 @@ export enum paths {
   SIGNUP = "signup",
   PRODUCTDETAIL = "/detail/:productId",
   PRODUCTDETAIL_BASE = "/detail",
+  NEWARRIVALS ="newarrivals"
 }

@@ -120,3 +120,4 @@ export interface ISnackBarContextType {
     severity: string
   ) => void;
 }
+

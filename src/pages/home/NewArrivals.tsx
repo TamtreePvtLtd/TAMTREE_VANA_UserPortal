@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { getNewArrivalProductsData } from "../../services/api";
-import { Product } from "../../interface/type";
+import { IProduct } from "../../interface/type";
 import CommonProductCard from "../../common/component/commonCard/CommonProductCard";
+import Slider from "react-slick";
 
 function NewArrivals() {
-  const [newArrivalProducts, setNewArrivalProducts] = useState<Product[]>([]);
-  const handleMouseEnter = (productId: string) => {};
-  const [hoveredProductImage, setHoveredProductImage] = useState<string | null>(
-    null
-  );
-  const handleMouseLeave = () => {};
-
+  const [newArrivalProducts, setNewArrivalProducts] = useState<IProduct[]>([]);
+  const isBelowMediumScreen = useMediaQuery("(max-width:960px)");
   async function fetchData() {
     try {
       const newArrivalProducts = await getNewArrivalProductsData();
@@ -20,18 +16,44 @@ function NewArrivals() {
       console.error(error);
     }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
 
+  const sliderSettings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    // slidesToScroll: 1,
+    autoplay: false,
+    arrows: !isBelowMediumScreen,
+
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1.1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 820,
+        settings: {
+          slidesToShow: 3.1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <Container>
+    <Container sx={{ py: 1 }}>
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          pb: "10px",
-        }}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        pb={1}
       >
        <Typography
     variant="h5"
@@ -50,20 +72,13 @@ function NewArrivals() {
   </Typography>
       </Box>
       <Box>
-        <Grid container spacing={2} justifyContent="center">
+        <Slider {...sliderSettings}>
           {newArrivalProducts.map((product) => (
-            <Grid item xs={12} md={3} sm={6}>
-              <CommonProductCard
-                product={product}
-                onMouseEnter={(productId: string) =>
-                  handleMouseEnter(productId)
-                }
-                onMouseLeave={() => handleMouseLeave()}
-                hoveredProductImage={hoveredProductImage}
-              />
-            </Grid>
+            <Box px={2}>
+              <CommonProductCard product={product} />
+            </Box>
           ))}
-        </Grid>
+        </Slider>
       </Box>
     </Container>
   );
