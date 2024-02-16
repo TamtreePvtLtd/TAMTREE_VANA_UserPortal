@@ -9,11 +9,14 @@ import axios from "axios";
 import { ButtonGroup, Container } from "@mui/material";
 import useStyles from "../styles/cartDrawer";
 import { CartItem, MyBagDrawerProps } from "../interface/type";
+import { useNavigate } from "react-router";
 import { Box } from "@mui/material";
 
 const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   const classes = useStyles();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
+  const [activeStep, setActiveStep] = useState(0); // Set the initial active step for the vertical stepper
 
   useEffect(() => {
     const fetchCartDetails = async () => {
@@ -99,6 +102,12 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
       return item;
     });
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+  };
+
+  const handleProceedToCheckout = () => {
+    setActiveStep(0);
+    navigate("/verticalStepper"); 
+     onClose(); 
   };
 
   return (
@@ -228,10 +237,10 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             gap: 2,
           }}
         >
-          <Button variant="outlined" color="primary" onClick={handleClearCart}>
+          {/* <Button variant="outlined" color="primary" onClick={handleClearCart}>
             Clear Cart
-          </Button>
-          <Button variant="contained" sx={{ backgroundColor: "#FFE5CC" }}>
+          </Button> */}
+          <Button variant="contained" sx={{ backgroundColor: "#FFE5CC" }}  onClick={handleProceedToCheckout}>
             Proceed to Checkout
           </Button>
         </Box>

@@ -48,6 +48,7 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ILogin>({
     resolver: yupResolver(schema),
     mode: "all",
@@ -81,6 +82,10 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
         if (error.response && error.response.data) {
         }
       });
+      console.log("Resetting form...");
+      const resetResult = reset(); // Reset the form
+      console.log("Reset result:", resetResult);
+   
   };
 
   const handleRegisterLinkClick = () => {
