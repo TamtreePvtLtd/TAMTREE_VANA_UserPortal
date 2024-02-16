@@ -132,7 +132,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar
-        position="sticky"
+        position="static"
         sx={{
           boxShadow: 0,
           height: isMobileView ? "90px" : "110px",
