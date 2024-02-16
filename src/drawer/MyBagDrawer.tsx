@@ -6,9 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { ButtonGroup, Container } from "@mui/material";
 
 import useStyles from "../styles/cartDrawer";
 import { CartItem, MyBagDrawerProps } from "../interface/type";
+import { Box } from "@mui/material";
 
 const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   const classes = useStyles();
@@ -97,71 +99,138 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   };
 
   return (
-    <Drawer anchor="right" open={open} onClose={onClose}>
-      <Grid
-        container
-        direction="column"
-        sx={{ width: "378px" }}
-        className={classes.drawerContainer}
-      >
-        <Grid container item className={classes.drawerHeader}>
-          <Typography variant="h6">My Bag</Typography>
-          <IconButton onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-        {cartItems.length === 0 ? (
-          <Grid container item direction="column" alignItems="center">
-            <Typography variant="body1" gutterBottom>
-              Your cart is empty
-            </Typography>
-            <Button variant="contained" color="primary" onClick={onClose}>
-              Go to Shopping
-            </Button>
+    <Container>
+      <Drawer anchor="right" open={open} onClose={onClose}>
+        <Grid
+          container
+          direction="column"
+          sx={{ width: "360px" }}
+          className={classes.drawerContainer}
+        >
+          <Grid container item className={classes.drawerHeader}>
+            <Typography variant="h6">My Bag</Typography>
+            <IconButton onClick={onClose}>
+              <CloseIcon />
+            </IconButton>
           </Grid>
-        ) : (
-          <>
-            {cartItems.map((item) => (
-              <Grid container item key={item._id}>
-                <img
-                  src={item.posterURL}
-                  alt={item.title}
-                  className={classes.posterImage}
-                />
+          {cartItems.length === 0 ? (
+            <Grid container item direction="column" alignItems="center" gap={5}>
+              <Typography variant="body1" gutterBottom>
+                Your cart is empty
+              </Typography>
+              <Button variant="contained" color="primary" onClick={onClose}>
+                Go to Shopping
+              </Button>
+            </Grid>
+          ) : (
+            <>
+              {cartItems.map((item) => (
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Box>
+                      <img
+                        src={item.posterURL}
+                        alt={item.title}
+                        className={classes.posterImage}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography>{item.title}</Typography>
 
-                <Typography>{item.title}</Typography>
-                <Typography>{item.price}</Typography>
-                <IconButton onClick={() => handleDecrement(item._id)}>
-                  -
-                </IconButton>
-                <Typography>{item.quantity}</Typography>
-                <IconButton onClick={() => handleIncrement(item._id)}>
-                  +
-                </IconButton>
-                <Button onClick={() => handleRemove(item._id)}>Remove</Button>
-              </Grid>
-            ))}
-            <Typography>
-              Total Price: $
-              {cartItems.reduce(
-                (total, item) => total + item.quantity * item.price,
-                0
-              )}
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => localStorage.removeItem("cart")}
-            >
-              Clear Cart
-            </Button>
-            <Button variant="contained" color="primary">
-              Proceed to Checkout
-            </Button>
-          </>
-        )}
-      </Grid>
-    </Drawer>
+                      <IconButton onClick={() => handleRemove(item._id)}>
+                        <CloseIcon fontSize="small" sx={{ color: "#9e9e9e" }} />
+                      </IconButton>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        mt: 2,
+                        // mr: 7,
+                      }}
+                    >
+                      <ButtonGroup
+                        className="test"
+                        sx={{
+                          lineHeight: 1,
+                          padding: 0,
+                          "& .MuiButtonGroup-grouped": {
+                            minWidth: "32px",
+                          },
+                          "& .MuiButtonBase-root:hover": {
+                            border: "none",
+                          },
+
+                          border: "1px solid #dfdfdf",
+                        }}
+                        size="small"
+                        aria-label="small outlined button group"
+                      >
+                        <Button
+                          onClick={() => handleDecrement(item._id)}
+                          sx={{ color: "black" }}
+                        >
+                          -
+                        </Button>
+                        <Button sx={{ color: "black" }}>{item.quantity}</Button>
+                        <Button
+                          onClick={() => handleIncrement(item._id)}
+                          sx={{ color: "black" }}
+                        >
+                          +
+                        </Button>
+                      </ButtonGroup>
+                      <Typography sx={{ marginLeft: "8px" }}>
+                        ${item.price}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+              ))}
+              <Box sx={{ marginTop: "50px" }}>
+                <Typography fontWeight={"bold"}>
+                  Total Price:&nbsp;&nbsp; $
+                  {cartItems.reduce(
+                    (total, item) => total + item.quantity * item.price,
+                    0
+                  )}
+                </Typography>
+              </Box>
+            </>
+          )}
+        </Grid>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            position: "sticky",
+            bottom: "10px",
+            padding: "10px",
+            gap: 2,
+          }}
+        >
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => localStorage.removeItem("cart")}
+          >
+            Clear Cart
+          </Button>
+          <Button variant="contained" sx={{ backgroundColor: "#FFE5CC" }}>
+            Proceed to Checkout
+          </Button>
+        </Box>
+      </Drawer>
+    </Container>
   );
 };
 
