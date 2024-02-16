@@ -15,7 +15,7 @@ const Layout = () => {
   location.pathname === `/${paths.LOGIN}` || location.pathname === `/${paths.SIGNUP}`;
 
   const isProductDetailPage = location.pathname.startsWith(
-    `/${paths.PRODUCTDETAIL}`
+    `${paths.PRODUCTDETAIL}`
   );
 
   return (
@@ -30,7 +30,8 @@ const Layout = () => {
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      {isLoginOrSignup && isProductDetailPage && <Footer />}
+      <Footer />
+      {/* {!isLoginOrSignup && !isProductDetailPage && <Footer />} */}
     </>
   );
 };
