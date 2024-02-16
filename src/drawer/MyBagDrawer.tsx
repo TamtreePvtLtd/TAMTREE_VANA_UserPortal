@@ -7,7 +7,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { ButtonGroup, Container } from "@mui/material";
-
 import useStyles from "../styles/cartDrawer";
 import { CartItem, MyBagDrawerProps } from "../interface/type";
 import { Box } from "@mui/material";
@@ -78,6 +77,10 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
     });
     setCartItems(updatedCart);
   };
+  const handleClearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
 
   const handleRemove = (productId: string) => {
     const updatedCart = cartItems.filter((item) => item._id !== productId);
@@ -108,13 +111,23 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
           className={classes.drawerContainer}
         >
           <Grid container item className={classes.drawerHeader}>
-            <Typography variant="h6">My Bag</Typography>
+            <Typography variant="h6" sx={{ mb: "30px" }}>
+              My Bag
+            </Typography>
             <IconButton onClick={onClose}>
               <CloseIcon />
             </IconButton>
           </Grid>
           {cartItems.length === 0 ? (
-            <Grid container item direction="column" alignItems="center" gap={5}>
+            <Grid
+              container
+              item
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ height: "50%" }}
+              gap={5}
+            >
               <Typography variant="body1" gutterBottom>
                 Your cart is empty
               </Typography>
@@ -144,18 +157,15 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
                       }}
                     >
                       <Typography>{item.title}</Typography>
-
                       <IconButton onClick={() => handleRemove(item._id)}>
                         <CloseIcon fontSize="small" sx={{ color: "#9e9e9e" }} />
                       </IconButton>
                     </Box>
-
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
                         mt: 2,
-                        // mr: 7,
                       }}
                     >
                       <ButtonGroup
@@ -218,11 +228,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             gap: 2,
           }}
         >
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => localStorage.removeItem("cart")}
-          >
+          <Button variant="outlined" color="primary" onClick={handleClearCart}>
             Clear Cart
           </Button>
           <Button variant="contained" sx={{ backgroundColor: "#FFE5CC" }}>
