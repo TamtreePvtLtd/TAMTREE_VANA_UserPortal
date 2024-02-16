@@ -55,18 +55,21 @@ function NewArrivals() {
         alignItems="center"
         pb={1}
       >
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: 800,
-            color: "black",
-            lineHeight: 2,
-            margin: "0 auto",
-            p: 2,
-          }}
-        >
-          New Arrival
-        </Typography>
+       <Typography
+    variant="h5"
+    sx={{
+      margin: "0px 10px 0px 0px",
+      fontWeight: 800,
+      color: "black",
+      lineHeight: 2,
+      fontFamily: '"Crimson Text", serif', 
+      fontStyle: "italic",
+      fontSize:"35px",
+      padding:2
+    }}
+  >
+    New Arrival
+  </Typography>
       </Box>
       <Box>
         <Slider {...sliderSettings}>

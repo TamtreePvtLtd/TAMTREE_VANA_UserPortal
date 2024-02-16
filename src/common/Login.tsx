@@ -13,8 +13,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSnackBar } from "../context/SnackBarContext";
 import { ILogin } from "../interface/type";
 import { paths } from "../routes/path";
-
-
+import { useAuthContext } from "../context/AuthContext";
+import { LoginCredentials } from "../services/api";
 
 interface LoginProps {
   onLogin?(): void;
@@ -23,21 +23,22 @@ interface LoginProps {
 }
 
 const schema = yup.object().shape({
-  phoneNumber: yup
+  email: yup
     .string()
-    .required("PhoneNumber is required")
     .matches(
-      /[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{1}/,
-      "Please enter a valid phone number"
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Please enter a valid email address"
     )
-    .max(10, "Phone number must be 10 digits"),
+    .required("Email is required"),
   password: yup.string().required("Password is required"),
 });
 
 function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
+  const { updateUserData } = useAuthContext();
+    const { updateSnackBarState } = useSnackBar();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const { updateSnackBarState } = useSnackBar();
   const { state } = location;
   const isFromNavbar = state?.fromNavbar || false;
   const isFromOrders = state?.fromOrders || false;
@@ -52,18 +53,35 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
     mode: "all",
   });
 
+  // Handle successful login
   const handleLogin = async (data: ILogin) => {
-    try {
-      
-      if (onLogin) {
-        onLogin();
-      }
-    } catch (error) {
-      // Handle login error, show snackbar, etc.
-      updateSnackBarState(true, "Login failed", "error");
-    }
-  };
 
+    await LoginCredentials(data)
+      .then((response) => {
+        if (response.data) {
+          updateUserData({
+            ...response.data,
+          });
+          if (isFromNavbar) {
+            navigate(paths.ROOT);
+          }
+          if (isFromOrders) {
+            navigate(`/${paths.ORDERS}`);
+          }
+          if (isFromSignup) {
+            navigate(paths.ROOT);
+          } else {
+            if (onLogin) onLogin();
+          }
+        } else {
+          updateUserData(null);
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+        }
+      });
+  };
 
   const handleRegisterLinkClick = () => {
     if (isFromNavbar) {
@@ -79,7 +97,6 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
     }
   };
 
-
   return (
     <>
       <Box
@@ -87,10 +104,10 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          p: 2,
+          py: 2,
         }}
       >
-        <Box>
+        <Box sx={{ p: "15px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}>
           {requiredHeading && (
             <Typography variant="h5" align="center" gutterBottom>
               Login
@@ -98,16 +115,16 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
           )}
           <form onSubmit={handleSubmit(handleLogin)}>
             <Typography>
-              PhoneNumber<span style={{ color: "red" }}>*</span>
+              Email<span style={{ color: "red" }}>*</span>
             </Typography>
             <TextField
               variant="outlined"
               margin="normal"
               fullWidth
               type="tel"
-              {...register("phoneNumber")}
-              error={!!errors.phoneNumber}
-              helperText={errors.phoneNumber?.message?.toString()}
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email?.message?.toString()}
               autoComplete="new"
               required
             />
@@ -127,9 +144,19 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
             />
             <Button
               variant="contained"
-              color="primary"
+              sx={{
+                backgroundColor: "#e17c57",
+                marginTop: 3,
+                color: "white",
+                letterSpacing: "2px",
+                borderRadius: 0,
+                paddingX: 4,
+                fontSize: "15px",
+                "&:hover": {
+                  backgroundColor: "#f2733d",
+                },
+              }}
               fullWidth
-              sx={{ marginTop: 3 }}
               type="submit"
             >
               Login

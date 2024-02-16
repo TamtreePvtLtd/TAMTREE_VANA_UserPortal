@@ -36,14 +36,10 @@ const theme = createTheme({
           "& label.Mui-focused": {
             color: "black",
           },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black", 
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black",
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black", 
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "black",
+            },
           },
         },
       },
