@@ -26,7 +26,10 @@ const SecondaryNavbar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <AppBar position="static" sx={{ boxShadow: 0, bgcolor: "primary" }}>
+    <AppBar
+      position="static"
+      sx={{ boxShadow: 0, bgcolor: "primary", zIndex: 1 }}
+    >
       <Toolbar>
         <Grid
           container

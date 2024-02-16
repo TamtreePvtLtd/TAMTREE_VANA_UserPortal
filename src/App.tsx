@@ -26,31 +26,36 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <SnackBarProvider>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <Routes>
-              <Route path={paths.ROOT} element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path={paths.EARRINGS} element={<EarRings />} />
-                <Route path={paths.BRACELETS} element={<Bracelates />} />
-                <Route path={paths.NECKLACES} element={<Necklaces />} />
-                <Route path={paths.BESTSELLER} element={<BestSeller />} />
-                <Route path={paths.FAQABOUT} element={<FAQ />} />
-                <Route path={paths.NEWARRIVALS} element={<NewArrivals />} />
-                <Route
-                  path={paths.LOGIN}
-                  element={<Login requiredHeading={true} />}
-                />
-                <Route
-                  path={paths.SIGNUP}
-                  element={<Signup requiredHeading={true} />}
-                />
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Routes>
+                <Route path={paths.ROOT} element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path={paths.EARRINGS} element={<EarRings />} />
+                  <Route path={paths.BRACELETS} element={<Bracelates />} />
+                  <Route path={paths.NECKLACES} element={<Necklaces />} />
+                  <Route path={paths.BESTSELLER} element={<BestSeller />} />
+                  <Route path={paths.FAQABOUT} element={<FAQ />} />
+                  <Route path={paths.NEWARRIVALS} element={<NewArrivals />} />
+                  <Route
+                    path={paths.LOGIN}
+                    element={<Login requiredHeading={true} />}
+                  />
+                  <Route
+                    path={paths.SIGNUP}
+                    element={<Signup requiredHeading={true} />}
+                  />
 
-                <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
-              </Route>
-             
-              <Route path={paths.VERTICALSTEPPER} element={<VerticalStepper />} />
-            </Routes>
+                  <Route
+                    path={paths.PRODUCTDETAIL}
+                    element={<ProductDetail />}
+                  />
+                  <Route
+                    path={paths.VERTICALSTEPPER}
+                    element={<VerticalStepper />}
+                  />
+                </Route>
+              </Routes>
             </BrowserRouter>
           </ThemeProvider>
         </SnackBarProvider>

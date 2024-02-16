@@ -36,7 +36,7 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
+          <Typography variant="h6" sx={{ marginLeft: 1, color: "#eba460" }}>
             VANA
           </Typography>
           <IconButton onClick={onClose}>
@@ -52,12 +52,11 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
               to={item.link}
               onClick={onClose}
             >
-            
-                <ListItemText
-                  primary={item.text}
-                  style={{ fontFamily: "cursive" }}
-                />
-             
+              <ListItemText>
+                <Typography variant="body1" sx={{ fontFamily: "cursive" }}>
+                  {item.text}
+                </Typography>
+              </ListItemText>
             </ListItemButton>
           ))}
         </List>

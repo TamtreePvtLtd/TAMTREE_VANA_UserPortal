@@ -1,27 +1,26 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   drawerContainer: {
-    padding: '16px',
-    height: '100%',
-    justifyContent: 'space-between',
+    padding: "16px",
+    height: "100%",
   },
   drawerHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2px',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
   },
   drawerContent: {
     flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   posterImage: {
-    width: "50px", // Adjust size as needed
-    height: "50px", // Adjust size as needed
+    width: "100px",
+    height: "100px",
   },
 }));
 

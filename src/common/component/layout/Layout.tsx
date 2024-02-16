@@ -8,7 +8,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { paths } from "../../../routes/path";
 
 const Layout = () => {
-
   const isSmallScreen = useMediaQuery("(min-width:1000px)");
   const location = useLocation();
 
@@ -17,14 +16,18 @@ const Layout = () => {
 
   return (
     <>
-      <Nav />
-      <Box>{isSmallScreen && <SecondaryNavbar />}</Box>
-      <Divider />
+      <Box style={{ position: "sticky", top: 0, zIndex: 1000 }}>
+        <Nav />
+      </Box>
+      <Box style={{ position: "sticky", top: "110px", zIndex: 1000 }}>
+        {isSmallScreen && <SecondaryNavbar />}
+        <Divider />
+      </Box>
+
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      {!isLoginOrSignup && <Footer />}
-      {location.pathname === `/detail/:productId` && <Footer />}
+      <Footer />
     </>
   );
 };

@@ -18,6 +18,7 @@ import {
   ThemeProvider,
   useTheme,
 } from "@mui/material";
+import { isAuthorized } from "../services/api";
 
 const VerticalStepper = () => {
   const [renderRegister, setRenderRegister] = React.useState(false);
@@ -36,6 +37,22 @@ const VerticalStepper = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
+  const checkIsAuthorized = async () => {
+    try {
+      const data = await isAuthorized();
+      if (data) {
+        setActiveStep(1);
+      } else {
+        setActiveStep(0);
+      }
+    } catch (error) {
+      console.error("Error checking authorization:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    checkIsAuthorized();
+  }, []);
 
   const steps = [
     renderRegister ? "Register" : "Login",
@@ -46,23 +63,25 @@ const VerticalStepper = () => {
   const getStepContent = (stepIndex: number) => {
     switch (stepIndex) {
       case 0:
-        return renderRegister ? (
-          <Signup
-            onSign={handleNext}
-            onRegisterLinkClick={() => {
-              setRenderRegister((preState) => !preState);
-              setActiveStep(0);
-            }}
-          />
-        ) : (
-          <Login
-            onLogin={handleNext}
-            onRegisterLinkClick={() => {
-              setRenderRegister((preState) => !preState);
-              setActiveStep(0);
-            }}
-          />
-        );
+     
+          return renderRegister ? (
+            <Signup
+              onSign={handleNext}
+              onRegisterLinkClick={() => {
+                setRenderRegister((preState) => !preState);
+                setActiveStep(0);
+              }}
+            />
+          ) : (
+            <Login
+              onLogin={handleNext}
+              onRegisterLinkClick={() => {
+                setRenderRegister((preState) => !preState);
+                setActiveStep(0);
+              }}
+            />
+          );
+       
       case 1:
         return <ShippingAddress handleNext={handleNext} />;
 
@@ -98,7 +117,7 @@ const VerticalStepper = () => {
               </IconButton>
             </Grid>
             <Grid item xs={10}>
-              <Typography fontWeight={600} fontSize={"medium"} color={"black"}>
+              <Typography variant="h6" fontWeight={600} fontSize={"medium"} color={"black"}>
                 Place your order
               </Typography>
             </Grid>
@@ -122,8 +141,12 @@ const VerticalStepper = () => {
                       {getStepContent(activeStep)}
                     </Box>
                     {activeStep == 2 && (
-                      <Box sx={{p:2}}>
-                        <Button variant="contained"  size="small">
+                      <Box sx={{ p: 2 }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={handleBack}
+                        >
                           GO Back
                         </Button>
                       </Box>
