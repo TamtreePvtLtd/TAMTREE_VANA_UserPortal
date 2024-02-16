@@ -7,17 +7,21 @@ import Divider from "@mui/material/Divider";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Layout = () => {
-
   const isSmallScreen = useMediaQuery("(min-width:1000px)");
   return (
     <>
-      <Nav/>
-      <Box>{isSmallScreen && <SecondaryNavbar/>}</Box>
-      <Divider/>
+      <Box style={{ position: "sticky", top: 0, zIndex: 1000 }}>
+        <Nav />
+      </Box>
+      <Box style={{ position: "sticky", top: "110px", zIndex: 1000 }}>
+        {isSmallScreen && <SecondaryNavbar />}
+        <Divider />
+      </Box>
+
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      <Footer/>
+      <Footer />
     </>
   );
 };
