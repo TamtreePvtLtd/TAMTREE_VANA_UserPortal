@@ -17,12 +17,13 @@ function Footer() {
   const mobilescreen = useMediaQuery("(max-width:700px)");
 
   return (
-    <Box sx={{ backgroundColor: "#f5f0ec" }}>
+    <Box sx={{ backgroundColor: "#f5f0ec", marginTop:0}}>
       <Box>
         <Box sx={{ display: "flex", justifyContent: "center", py: 3 }}>
-          <Typography variant="h4" fontWeight={600}>
-            Contact Us
-          </Typography>
+        <Typography variant="h4" fontWeight={600} fontFamily="'Crimson Text', serif" fontStyle="italic" fontSize="35px">
+  Contact Us
+</Typography>
+
         </Box>
 
         <Grid container sx={{ gap: 3 }}>
