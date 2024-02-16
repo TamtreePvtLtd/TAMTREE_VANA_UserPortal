@@ -92,7 +92,12 @@ const CommonPage = (props: Icommonpage) => {
           in={expandDescription}
           timeout="auto"
           unmountOnExit
-          sx={{ margin: "25px" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "center",
+            margin: "25px",
+          }}
         >
           <Typography>
             {jewelleryItemWithCollection?.JewelleryCollectionDescription}

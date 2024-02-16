@@ -1,4 +1,4 @@
-import { ICollection, ILogin, ILoginResponse, ISignUp } from "../interface/type";
+import { ICollection, ILogin, ILoginResponse, IProductDetails, ISignUp, IUser } from "../interface/type";
 import { httpWithCredentials, httpWithoutCredentials } from "./http";
 import { IProduct } from "../interface/type";
 
@@ -40,15 +40,10 @@ const getNewArrivalProductsData = async () => {
   }
 };
 
-export { getNewArrivalProductsData, getAllItemsByCollectionName, getAllItemsById };
-
-
-
-const loginCredentials = async (credential: ILogin) => {
+const fetchProductDetailById = async (productId: string) => {
   try {
-    const response = await httpWithCredentials.post<ILogin>(
-      "/user/userlogin",
-      credential
+    var response = await httpWithoutCredentials.get<IProductDetails>(
+      `/JewelleryItem/getJewelleryItemByID/${productId}`
     );
     return response.data;
   } catch (error) {
@@ -56,6 +51,41 @@ const loginCredentials = async (credential: ILogin) => {
   }
 };
 
+export { getNewArrivalProductsData, getAllItemsByCollectionName, getAllItemsById,fetchProductDetailById };
+
+
+
+const LoginCredentials = async (login:ILogin) => {
+  try {
+    const response = await httpWithCredentials.post<ILoginResponse>("/customer/login", login);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+const LogOut = async () => {
+  try {
+    const response = await httpWithCredentials.get<ILoginResponse>(
+      "/customer/logout"
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const isAuthorized = async () => {
+  try {
+    const response = await httpWithCredentials.get<IUser>(
+      "/customer/isAuthorized"
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 const signUp = async (credential: ISignUp) => {
   try {
@@ -70,4 +100,4 @@ const signUp = async (credential: ISignUp) => {
 };
 
 
-export { loginCredentials, signUp };
+export {  signUp,LoginCredentials,LogOut,isAuthorized };

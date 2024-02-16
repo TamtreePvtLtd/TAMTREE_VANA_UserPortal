@@ -9,7 +9,6 @@ import Necklaces from "./pages/necklaces/Necklaces";
 import FAQ from "./pages/faqabout/FAQ";
 import { paths } from "./routes/path";
 import Login from "./common/Login";
-// import Signup from "./common/Signup";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SnackBarProvider from "./context/SnackBarContext";
 import CustomSnackBar from "./common/CustomSnackBar";
@@ -25,6 +24,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <SnackBarProvider>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Routes>
@@ -44,12 +44,15 @@ function App() {
                   path={paths.SIGNUP}
                   element={<Signup requiredHeading={true} />}
                 />
+
+                <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
               </Route>
-              <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
             </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </SnackBarProvider>
       </AuthProvider>
+      <CustomSnackBar />
     </QueryClientProvider>
   );
 }
