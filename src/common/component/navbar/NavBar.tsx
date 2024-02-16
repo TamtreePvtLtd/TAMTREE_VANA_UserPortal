@@ -133,7 +133,11 @@ const Navbar = () => {
     <>
       <AppBar
         position="static"
-        sx={{ boxShadow: 0, height: "110px", bgcolor: "#ffffff" }}
+        sx={{
+          boxShadow: 0,
+          height: isMobileView ? "90px" : "110px",
+          bgcolor: "#ffffff",
+        }}
       >
         <Toolbar>
           <Grid
@@ -141,12 +145,11 @@ const Navbar = () => {
             display={"flex"}
             alignItems="center"
             justifyContent={"center"}
-            padding={2}
           >
             <Grid item xs={4} md={4}>
               {isMobileView ? (
                 <Grid item xs={12}>
-                  <Box display={"flex"}>
+                  <Box>
                     <IconButton color="inherit" onClick={handleDrawerOpen}>
                       <MenuIcon />
                     </IconButton>
@@ -160,7 +163,7 @@ const Navbar = () => {
                 </Grid>
               ) : (
                 <Grid item xs={12} md={8}>
-                  <Box sx={{ width: "100%", padding: "8px" }}>
+                  <Box>
                     <TextField
                       variant="outlined"
                       size="small"

@@ -120,9 +120,8 @@ const CommonPage = (props: Icommonpage) => {
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
-            width: "200px",
-            height: "40px",
+           alignItems: "center",
+                 height: "40px",
           }}
         >
           <FormControl fullWidth>
