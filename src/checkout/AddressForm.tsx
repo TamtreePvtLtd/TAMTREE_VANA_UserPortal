@@ -3,6 +3,11 @@ import { Box, Button, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 
 function AddressForm() {
+   const handleOrderNowClick = () => {
+     checkOrderNowValidation();
+  };
+  const checkOrderNowValidation = async () => {
+  }
   return (
     <Box>
       <Box
@@ -74,8 +79,13 @@ function AddressForm() {
           </span>
         </Typography>
       </Box>
-      <Box sx={{ bottom: 20, width: "100%" }}>
-        <Button variant="contained" size="small" fullWidth>
+      <Box sx={{ bottom: 20, width: "100%", p: 1 }}>
+        <Button
+          variant="contained"
+          
+          fullWidth
+          onClick={handleOrderNowClick}
+        >
           Order Now
         </Button>
       </Box>

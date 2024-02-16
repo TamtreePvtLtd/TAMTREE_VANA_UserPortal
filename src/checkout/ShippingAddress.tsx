@@ -15,8 +15,11 @@ interface FormData {
   pincode: string;
   district: string;
 }
+interface ShippingAddressProps {
+  handleNext: () => void;
+}
 
-function ShippingAddress() {
+function ShippingAddress({ handleNext }: ShippingAddressProps) {
   const {
     register,
     handleSubmit,
@@ -31,7 +34,9 @@ function ShippingAddress() {
       district: data.district,
     };
     console.log(formData);
+     handleNext(); 
   };
+  
 
   return (
     <Box mt={1}>
