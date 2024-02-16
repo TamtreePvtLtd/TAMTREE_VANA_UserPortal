@@ -117,7 +117,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
                       component={"img"}
                     />
                   </Grid>
-                  <Grid item xs={8}>
+                  <Grid item xs={8} sm={9}>
                     <Box>
                       <Typography sx={{ fontSize: "0.9rem" }}>
                         {product.title}

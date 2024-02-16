@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, Divider, IconButton } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { ButtonGroup } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
-import { useNavigate, useParams } from "react-router";
-import { useProductDetailById } from "../CustomRQHooks/Hooks";
+import {  useParams } from "react-router";
+import { useProductDetailById } from "../hooks/CustomRQHooks";
 import { CartItem } from "../interface/type";
 import CustomSnackBar from "../common/CustomSnackBar";
 import { useSnackBar } from "../context/SnackBarContext";
@@ -14,7 +14,6 @@ import { useSnackBar } from "../context/SnackBarContext";
 
 function ProductDetail() {
   const { productId } = useParams();
-  const navigate = useNavigate();
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { updateSnackBarState } = useSnackBar();
