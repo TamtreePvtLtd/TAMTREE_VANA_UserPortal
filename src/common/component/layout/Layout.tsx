@@ -12,11 +12,11 @@ const Layout = () => {
   const location = useLocation();
 
   const isLoginOrSignup =
-  location.pathname === `/${paths.LOGIN}` || location.pathname === `/${paths.SIGNUP}`;
+    location.pathname === `/${paths.LOGIN}` || location.pathname === `/${paths.SIGNUP}`;
 
   const isProductDetailPage = location.pathname.startsWith(
-    `${paths.PRODUCTDETAIL}`
-  );
+    `${paths.PRODUCTDETAIL}`)
+
 
   return (
     <>
@@ -32,7 +32,7 @@ const Layout = () => {
       </Box>
       <Footer />
       {/* {!isLoginOrSignup && !isProductDetailPage && <Footer />} */}
-    </>
+      </>
   );
 };
 
