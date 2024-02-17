@@ -71,7 +71,7 @@ function ProductDetail() {
   };
 
   return (
-    <Container>
+    <Container sx={{ mb: 15 }}>
       <Grid container spacing={2} sx={{ marginTop: 4 }}>
         <Grid item xs={12} md={5} lg={6}>
           <Box sx={{ pb: 2 }}>
@@ -173,7 +173,14 @@ function ProductDetail() {
                 <Box sx={{ mt: 2 }}>
                   <Button
                     variant="contained"
-                    sx={{ width: "70%", marginTop: "10px" }}
+                    sx={{
+                      width: "70%",
+                      marginTop: "10px",
+                      backgroundColor: "#e17c57",
+                      "&:hover": {
+                        backgroundColor: "#f2733d",
+                      },
+                    }}
                     onClick={addToCart}
                   >
                     Add to Cart

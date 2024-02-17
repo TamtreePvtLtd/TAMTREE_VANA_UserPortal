@@ -204,7 +204,7 @@ const Navbar = () => {
                   src={vanaLogo}
                   sx={{
                     backgroundColor: "#F6F6F6",
-                    height: "100px",
+                    height: isMobileView ? "80px" : "100px",
                     width: "130px",
                     display: "flex",
                     alignItems: "center",

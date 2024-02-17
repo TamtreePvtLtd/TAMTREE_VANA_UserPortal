@@ -5,7 +5,6 @@ import NewArrivals from "./NewArrivals";
 import { Container } from "@mui/material";
 
 function Home() {
-   
   return (
     <>
       <Box>
@@ -20,11 +19,7 @@ function Home() {
           <NewArrivals />
         </Box>
       </Container>
-      <Box
-        sx={{
-          mb: 2,
-        }}
-      >
+      <Box>
         <AboutByVana />
       </Box>
     </>
@@ -32,6 +27,3 @@ function Home() {
 }
 
 export default Home;
-
-
-
