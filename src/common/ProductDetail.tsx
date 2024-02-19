@@ -5,19 +5,19 @@ import { Button } from "@mui/material";
 import { ButtonGroup } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
-import {  useParams } from "react-router";
+import { useParams } from "react-router";
 import { useProductDetailById } from "../hooks/CustomRQHooks";
 import { CartItem } from "../interface/type";
 import CustomSnackBar from "../common/CustomSnackBar";
 import { useSnackBar } from "../context/SnackBarContext";
-
+import Slider from "react-slick";
 
 function ProductDetail() {
   const { productId } = useParams();
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { updateSnackBarState } = useSnackBar();
-  const [showSnackbar, setShowSnackbar] = useState(false); 
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const productDetailQuery = useProductDetailById(productId ?? "");
 
@@ -70,51 +70,39 @@ function ProductDetail() {
     updateSnackBarState(true, "Added to Cart Successfully", "success");
   };
 
+  const sliderSettings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    autoplay: false,
+    arrows: true,
+  };
+
   return (
     <Container sx={{ mb: 15 }}>
       <Grid container spacing={2} sx={{ marginTop: 4 }}>
-        <Grid item xs={12} md={5} lg={6}>
-          <Box sx={{ pb: 2 }}>
-            <img
-              src={mainImage}
-              // alt="product image"
-              style={{
-                display: "block",
-                // margin: "1px auto",
-                borderRadius: "5px",
-                objectFit: "contain",
-                height: "100%",
-                maxWidth: "70%",
-              }}
-            />
+        <Grid item xs={12} md={6} lg={6}>
+          <Box sx={{ px: 6 }}>
+            <Slider {...sliderSettings}>
+              {productDetails &&
+                productDetails.images.map((image: string, index: number) => (
+                  <Box key={index}>
+                    <img
+                      src={image}
+                      alt={`Image ${index + 1}`}
+                      onClick={() => handleImageClick(image)}
+                      style={{
+                        cursor: "pointer",
+                        height: "100%",
+                        maxWidth: "100%",
+                        borderRadius: "5px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </Box>
+                ))}
+            </Slider>
           </Box>
-
-          <Grid
-            item
-            xs={12}
-            md={2}
-            sx={{ display: "flex", flexDirection: "row", gap: 2 }}
-          >
-            {productDetails &&
-              productDetails.images.map((image, index) => (
-                <Box
-                  key={index}
-                  onClick={() => handleImageClick(image)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <img
-                    src={image}
-                    alt={`Image ${index + 1}`}
-                    style={{
-                      height: "87px",
-                      width: "75px",
-                      borderRadius: "5px",
-                      objectFit: "cover",
-                    }}
-                  />
-                </Box>
-              ))}
-          </Grid>
         </Grid>
         <Grid item xs={12} md={6} lg={6}>
           <Box
@@ -195,7 +183,7 @@ function ProductDetail() {
                     Description:
                   </Typography>
                 </Box>
-                <Box sx={{ marginTop: "8px", height: "0.5em" }}>
+                <Box sx={{ marginTop: "8px" }}>
                   <Typography>{productDetails.description}</Typography>
                 </Box>
               </>
