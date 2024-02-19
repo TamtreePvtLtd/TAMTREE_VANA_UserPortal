@@ -157,7 +157,7 @@ const CommonPage = (props: Icommonpage) => {
       jewelleryItemWithCollection.jewelleryItems.length > 0 ? (
         <Grid container spacing={3}>
           {sortedProducts.map((product:IProduct) => (
-            <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={product._id} xs={6} sm={6} md={4} lg={3}>
               <CommonProductCard product={product} />
             </Grid>
           ))}
