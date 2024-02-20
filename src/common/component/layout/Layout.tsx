@@ -12,11 +12,12 @@ const Layout = () => {
   const location = useLocation();
 
   const isLoginOrSignup =
-  location.pathname === `/${paths.LOGIN}` || location.pathname === `/${paths.SIGNUP}`;
+    location.pathname === `/${paths.LOGIN}` ||
+    location.pathname === `/${paths.SIGNUP}`;
 
-  const isProductDetailPage = location.pathname.startsWith(
-    `${paths.PRODUCTDETAIL}`
-  );
+ const isProductDetailPage = location.pathname.startsWith(
+   `/${paths.PRODUCTDETAIL.split("/")[1]}`
+ );
 
   return (
     <>
@@ -30,8 +31,7 @@ const Layout = () => {
       <Box sx={{ marginTop: "5px" }}>
         <Outlet />
       </Box>
-      <Footer />
-      {/* {!isLoginOrSignup && !isProductDetailPage && <Footer />} */}
+      {!isLoginOrSignup && !isProductDetailPage && <Footer />}
     </>
   );
 };

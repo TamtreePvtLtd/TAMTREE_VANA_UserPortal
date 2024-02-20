@@ -1,3 +1,25 @@
 @import "./loader.css";
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
+.custom-prev-arrow,
+.custom-next-arrow {
+    background-color: rgba(234, 147, 33, 0.5);
+    padding: 2px ;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.slick-track {
+    margin: 0;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: #e9a54b;
+    opacity: 1;
+    font-size: 2rem;
+}
+
+.slick-prev {
+    left: -35px;
+}
