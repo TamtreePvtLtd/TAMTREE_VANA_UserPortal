@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Icommonpage, IProduct, ISortingOptionLabel } from "../../../interface/type";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import ScrollToTop from "./ScroolToTop";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import CommonProductCard from "../commonCard/CommonProductCard";
 import { SortingOption } from "../sortingOption";
@@ -40,8 +40,8 @@ const CommonPage = (props: Icommonpage) => {
     setExpandDescription(!expandDescription);
   };
 
-  const handleSortChange = (e: any) => {
-    setSortProductOption(e.target.value);
+  const handleSortChange = (e: SelectChangeEvent<SortingOption>) => {
+    setSortProductOption(e.target.value as SortingOption);
   };
 
   const sortProducts = (products: IProduct[]): IProduct[] => {
