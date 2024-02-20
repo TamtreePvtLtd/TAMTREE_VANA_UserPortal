@@ -1,46 +1,32 @@
-import { useEffect, useState } from "react";
 import { Box, Container, Typography, useMediaQuery } from "@mui/material";
-import { getNewArrivalProductsData } from "../../services/api";
-import { IProduct } from "../../interface/type";
 import CommonProductCard from "../../common/component/commonCard/CommonProductCard";
+import { useGetAllItemsByCollectionName } from "../../hooks/CustomRQHooks";
+import { IProduct } from "../../interface/type";
 import Slider from "react-slick";
 
 function NewArrivals() {
-  const [newArrivalProducts, setNewArrivalProducts] = useState<IProduct[]>([]);
-  const isBelowMediumScreen = useMediaQuery("(max-width:960px)");
-  async function fetchData() {
-    try {
-      const newArrivalProducts = await getNewArrivalProductsData();
-      setNewArrivalProducts(newArrivalProducts);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const { data: NewArrivalsCollection } =
+    useGetAllItemsByCollectionName("New Arrivals");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const isLaptopScreen = useMediaQuery("(min-width:1000px)");
   const sliderSettings = {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    // slidesToScroll: 1,
     autoplay: false,
-    arrows: !isBelowMediumScreen,
-
+    arrows: isLaptopScreen,
     responsive: [
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.1,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 820,
         settings: {
-          slidesToShow: 3.1,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
@@ -65,13 +51,15 @@ function NewArrivals() {
           New Arrival
         </Typography>
       </Box>
-      <Box>
+      <Box sx={{ position: "relative" }}>
         <Slider {...sliderSettings}>
-          {newArrivalProducts.map((product) => (
-            <Box px={2}>
-              <CommonProductCard product={product} />
-            </Box>
-          ))}
+          {(NewArrivalsCollection?.jewelleryItems ?? []).map(
+            (product: IProduct) => (
+              <Box px={2} key={product._id}>
+                <CommonProductCard product={product} />
+              </Box>
+            )
+          )}
         </Slider>
       </Box>
     </Container>
