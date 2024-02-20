@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Icommonpage, IProduct, ISortingOptionLabel} from "../../../interface/type";
+import { Icommonpage, IProduct, ISortingOptionLabel } from "../../../interface/type";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-
+import ScrollToTop from "./ScroolToTop";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -28,6 +28,8 @@ const CommonPage = (props: Icommonpage) => {
   const [expandDescription, setExpandDescription] = useState(false);
   const [sortProductOption, setSortProductOption] = useState<SortingOption>(SortingOption.NameAZ);
   const [sortedProducts, setSortedProducts] = useState<IProduct[]>([]);
+  const [visibleProducts, setVisibleProducts] = useState<number>(20); 
+  const productsPerPage = 20; 
 
   useEffect(() => {
     const sortedProducts = sortProducts(jewelleryItemWithCollection?.jewelleryItems || []);
@@ -38,8 +40,8 @@ const CommonPage = (props: Icommonpage) => {
     setExpandDescription(!expandDescription);
   };
 
-  const handleSortChange = (e:any) => {
-    setSortProductOption(e.target.value );
+  const handleSortChange = (e: any) => {
+    setSortProductOption(e.target.value);
   };
 
   const sortProducts = (products: IProduct[]): IProduct[] => {
@@ -48,14 +50,25 @@ const CommonPage = (props: Icommonpage) => {
         return products.slice().sort((a, b) => a.price - b.price);
       case SortingOption.PriceHighToLow:
         return products.slice().sort((a, b) => b.price - a.price);
-        case SortingOption.NameAZ:
-      return products.slice().sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', usage: 'sort' }));
-    case SortingOption.NameZA:
-      return products.slice().sort((a, b) => b.title.localeCompare(a.title, undefined, { sensitivity: 'base', usage: 'sort' }));
-    default:
-      return products;
+      case SortingOption.NameAZ:
+        return products.slice().sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+      case SortingOption.NameZA:
+        return products.slice().sort((a, b) => b.title.localeCompare(a.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+      default:
+        return products;
     }
   };
+
+  const handleShowMoreImages = () => {
+    // Calculate the next number of visible products
+    const nextVisibleProducts = Math.min(visibleProducts + productsPerPage, sortedProducts.length);
+    setVisibleProducts(nextVisibleProducts);
+  };
+
+  const decreaseVisibleProducts = () => {
+    setVisibleProducts(Math.max(visibleProducts - productsPerPage, 20));
+  };
+
 
 
   return (
@@ -73,19 +86,19 @@ const CommonPage = (props: Icommonpage) => {
             {jewelleryItemWithCollection?.JewelleryCollectionName}
           </Typography>
           {jewelleryItemWithCollection?.JewelleryCollectionDescription && (
-          <IconButton
-            onClick={handleExpandClick}
-            aria-expanded={expandDescription}
-            size="medium"
-            sx={{
-              padding: 0,
-              width: "30px",
-              height: "30px",
-              "&:hover": { backgroundColor: "transparent" },
-            }}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+            <IconButton
+              onClick={handleExpandClick}
+              aria-expanded={expandDescription}
+              size="medium"
+              sx={{
+                padding: 0,
+                width: "30px",
+                height: "30px",
+                "&:hover": { backgroundColor: "transparent" },
+              }}
+            >
+              <ExpandMoreIcon />
+            </IconButton>
           )}
         </Box>
         <Collapse
@@ -120,8 +133,8 @@ const CommonPage = (props: Icommonpage) => {
         <Box
           sx={{
             display: "flex",
-           alignItems: "center",
-                 height: "40px",
+            alignItems: "center",
+            height: "40px",
           }}
         >
           <FormControl fullWidth>
@@ -152,19 +165,19 @@ const CommonPage = (props: Icommonpage) => {
           </FormControl>
         </Box>
       </Box>
-      {jewelleryItemWithCollection &&
-      jewelleryItemWithCollection.jewelleryItems &&
-      jewelleryItemWithCollection.jewelleryItems.length > 0 ? (
-        <Grid container spacing={3}>
-          {sortedProducts.map((product:IProduct) => (
-            <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
-              <CommonProductCard product={product} />
-            </Grid>
-          ))}
-        </Grid>
-      ) : (
-        <Typography>No products available</Typography>
+      <Grid container spacing={3}>
+        {sortedProducts.slice(0, visibleProducts).map((product: IProduct) => (
+          <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+            <CommonProductCard product={product} />
+          </Grid>
+        ))}
+      </Grid>
+      {sortedProducts.length > visibleProducts && (
+        <Box sx={{ display: "flex", justifyContent: "right", marginTop: "20px" }}>
+          <button onClick={handleShowMoreImages}>View More</button>
+        </Box>
       )}
+      <ScrollToTop scrollFunction={decreaseVisibleProducts}/>
     </Container>
   );
 };

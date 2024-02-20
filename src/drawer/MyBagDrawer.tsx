@@ -237,9 +237,9 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             gap: 2,
           }}
         >
-          {/* <Button variant="outlined" color="primary" onClick={handleClearCart}>
+          <Button variant="outlined" color="primary" onClick={handleClearCart}>
             Clear Cart
-          </Button> */}
+          </Button>
           <Button variant="contained" sx={{ backgroundColor: "#FFE5CC" }}  onClick={handleProceedToCheckout}>
             Proceed to Checkout
           </Button>

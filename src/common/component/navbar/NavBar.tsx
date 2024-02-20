@@ -119,9 +119,9 @@ const Navbar = () => {
       localStorage.getItem("cart") || "[]"
     );
     let totalQuantity = 0;
-    for (const item of cartItems) {
-      totalQuantity += item.quantity;
-    }
+    // for (const item of cartItems) {
+    //   totalQuantity += item.quantity;
+    // }
     setMyBagCount(cartItems.length);
   }, []);
 
@@ -253,7 +253,7 @@ const Navbar = () => {
       <Divider sx={{ width: "80%", margin: "auto" }} />
       <NavbarDrawer open={navDrawerOpen} onClose={handleDrawerClose} />
       <SearchDrawer open={searchDrawerOpen} onClose={handleSearchDrawerClose} />
-      <MyBagDrawer open={myBagDrawerOpen} onClose={handleMyBagDrawerClose} />
+      {/* <MyBagDrawer open={myBagDrawerOpen} onClose={handleMyBagDrawerClose} /> */}
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
