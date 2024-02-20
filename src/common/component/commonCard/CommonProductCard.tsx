@@ -30,6 +30,8 @@ const CommonProductCard = (props: Props) => {
         margin: "0 auto",
         textDecoration: "none",
         cursor: "pointer",
+        border: "none", // Remove the border
+        boxShadow: "none", // Remove the boxShadow
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -57,7 +59,7 @@ const CommonProductCard = (props: Props) => {
             },
           }}
         />
-        <CardContent sx={{ p: 1 }}>
+        <CardContent sx={{ p: 1, }}>
           <Typography
             variant="h6"
             title={product.title}
@@ -66,6 +68,7 @@ const CommonProductCard = (props: Props) => {
               overflow: "hidden",
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
+              fontFamily: "cursive",
             }}
             gutterBottom
           >
@@ -84,12 +87,13 @@ const CommonProductCard = (props: Props) => {
               WebkitLineClamp: 2,
               textOverflow: "ellipsis",
               whiteSpace: "normal",
+              fontFamily: "cursive",
             }}
           >
             {product.description}
           </Typography>
 
-          <Typography variant="h6" color="textPrimary">
+          <Typography variant="h6" color="textPrimary" fontFamily = "cursive">
             ${product.price}
           </Typography>
         </CardContent>
