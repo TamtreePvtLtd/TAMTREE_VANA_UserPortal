@@ -42,31 +42,7 @@ function Footer() {
               justifyContent: "center",
             }}
           >
-            <Grid item lg={3} md={4} xs={12} sm={5}>
-              <Box
-                sx={{
-                  my: 1,
-                  textAlign: "center",
-                }}
-              >
-                <LocationOnIcon
-                  fontSize="large"
-                  sx={{ color: theme.palette.secondary.main }}
-                />
-                <Typography variant="h5"> Store Address</Typography>
-                <Typography>
-                  2700 E Eldorado Pkwy, #203,
-                  <br /> Little Elm - 75068
-                </Typography>
-              </Box>
-            </Grid>
-
-            <Divider
-              orientation="vertical"
-              flexItem
-              sx={{ background: "white", borderWidth: "1px" }}
-            />
-
+         
             <Grid item lg={3} md={4} xs={12} sm={5}>
               <Box sx={{ my: 1, textAlign: "center" }}>
                 <ChatBubbleIcon
