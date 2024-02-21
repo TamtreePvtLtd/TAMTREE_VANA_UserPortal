@@ -17,6 +17,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import CommonProductCard from "../commonCard/CommonProductCard";
 import { SortingOption } from "../sortingOption";
+import { Button } from "@mui/material";
+
 
 const sortingOptions: ISortingOptionLabel[] = [
   { value: SortingOption.Default, label: "Default" },
@@ -112,7 +114,7 @@ const CommonPage = (props: Icommonpage) => {
               sx={{
                 width: "30px",
                 height: "30px",
-                "&:hover": { backgroundColor: "transparent" },  
+                "&:hover": { backgroundColor: "transparent" },
                 transform: expandDescription
                   ? "rotate(180deg)"
                   : "rotate(0deg)",
@@ -198,7 +200,9 @@ const CommonPage = (props: Icommonpage) => {
         <Box
           sx={{ display: "flex", justifyContent: "right", marginTop: "20px" }}
         >
-          <button onClick={handleShowMoreImages}>View More</button>
+          <Button variant="contained" onClick={handleShowMoreImages}>
+            View More
+          </Button>
         </Box>
       )}
       <ScrollToTop scrollFunction={decreaseVisibleProducts} />

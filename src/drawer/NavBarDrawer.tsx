@@ -21,6 +21,7 @@ const NavbarDrawer = ({ open, onClose }: NavbarDrawerProps) => {
     { text: "Ear Rings", link: paths.EARRINGS },
     { text: "Necklaces", link: paths.NECKLACES },
     { text: "Bracelets", link: paths.BRACELETS },
+    { text: "New Arrivals", link: paths.NEWARRIVALS },
     { text: "Best Seller", link: paths.BESTSELLER },
     { text: "FAQ/Aboutus", link: paths.FAQABOUT },
   ];

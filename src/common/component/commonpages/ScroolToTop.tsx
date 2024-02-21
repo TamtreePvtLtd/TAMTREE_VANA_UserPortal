@@ -40,7 +40,7 @@ const ScrollToTop:React.FC<scrollToTopProps>= ({scrollFunction}) => {
             height: "50px",
             width: "50px",
             cursor: "pointer",
-            backgroundColor: "#1556fe",
+            backgroundColor: "#eba460",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
             zIndex: "1",
             borderRadius: "50%",
