@@ -1,5 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Icommonpage, IProduct, ISortingOptionLabel } from "../../../interface/type";
+import {
+  Icommonpage,
+  IProduct,
+  ISortingOptionLabel,
+} from "../../../interface/type";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -26,13 +30,17 @@ const CommonPage = (props: Icommonpage) => {
   const jewelleryItemWithCollection = props;
 
   const [expandDescription, setExpandDescription] = useState(false);
-  const [sortProductOption, setSortProductOption] = useState<SortingOption>(SortingOption.NameAZ);
+  const [sortProductOption, setSortProductOption] = useState<SortingOption>(
+    SortingOption.NameAZ
+  );
   const [sortedProducts, setSortedProducts] = useState<IProduct[]>([]);
-  const [visibleProducts, setVisibleProducts] = useState<number>(20); 
-  const productsPerPage = 20; 
+  const [visibleProducts, setVisibleProducts] = useState<number>(20);
+  const productsPerPage = 20;
 
   useEffect(() => {
-    const sortedProducts = sortProducts(jewelleryItemWithCollection?.jewelleryItems || []);
+    const sortedProducts = sortProducts(
+      jewelleryItemWithCollection?.jewelleryItems || []
+    );
     setSortedProducts(sortedProducts);
   }, [jewelleryItemWithCollection?.jewelleryItems, sortProductOption]);
 
@@ -51,9 +59,19 @@ const CommonPage = (props: Icommonpage) => {
       case SortingOption.PriceHighToLow:
         return products.slice().sort((a, b) => b.price - a.price);
       case SortingOption.NameAZ:
-        return products.slice().sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+        return products.slice().sort((a, b) =>
+          a.title.localeCompare(b.title, undefined, {
+            sensitivity: "base",
+            usage: "sort",
+          })
+        );
       case SortingOption.NameZA:
-        return products.slice().sort((a, b) => b.title.localeCompare(a.title, undefined, { sensitivity: 'base', usage: 'sort' }));
+        return products.slice().sort((a, b) =>
+          b.title.localeCompare(a.title, undefined, {
+            sensitivity: "base",
+            usage: "sort",
+          })
+        );
       default:
         return products;
     }
@@ -61,15 +79,16 @@ const CommonPage = (props: Icommonpage) => {
 
   const handleShowMoreImages = () => {
     // Calculate the next number of visible products
-    const nextVisibleProducts = Math.min(visibleProducts + productsPerPage, sortedProducts.length);
+    const nextVisibleProducts = Math.min(
+      visibleProducts + productsPerPage,
+      sortedProducts.length
+    );
     setVisibleProducts(nextVisibleProducts);
   };
 
   const decreaseVisibleProducts = () => {
     setVisibleProducts(Math.max(visibleProducts - productsPerPage, 20));
   };
-
-
 
   return (
     <Container sx={{ marginY: "15px" }}>
@@ -91,10 +110,13 @@ const CommonPage = (props: Icommonpage) => {
               aria-expanded={expandDescription}
               size="medium"
               sx={{
-                padding: 0,
                 width: "30px",
                 height: "30px",
-                "&:hover": { backgroundColor: "transparent" },
+                "&:hover": { backgroundColor: "transparent" },  
+                transform: expandDescription
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+                transition: "transform 0.3s ease",
               }}
             >
               <ExpandMoreIcon />
@@ -167,17 +189,19 @@ const CommonPage = (props: Icommonpage) => {
       </Box>
       <Grid container spacing={3}>
         {sortedProducts.slice(0, visibleProducts).map((product: IProduct) => (
-          <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={product._id} xs={6} sm={6} md={4} lg={3}>
             <CommonProductCard product={product} />
           </Grid>
         ))}
       </Grid>
       {sortedProducts.length > visibleProducts && (
-        <Box sx={{ display: "flex", justifyContent: "right", marginTop: "20px" }}>
+        <Box
+          sx={{ display: "flex", justifyContent: "right", marginTop: "20px" }}
+        >
           <button onClick={handleShowMoreImages}>View More</button>
         </Box>
       )}
-      <ScrollToTop scrollFunction={decreaseVisibleProducts}/>
+      <ScrollToTop scrollFunction={decreaseVisibleProducts} />
     </Container>
   );
 };
