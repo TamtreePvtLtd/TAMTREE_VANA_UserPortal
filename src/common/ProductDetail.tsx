@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Divider } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
@@ -17,8 +17,7 @@ function ProductDetail() {
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { updateSnackBarState } = useSnackBar();
-  const [showSnackbar, setShowSnackbar] = useState(false);
-
+  
   const productDetailQuery = useProductDetailById(productId ?? "");
 
   const incrementQuantity = () => {
@@ -65,8 +64,6 @@ function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(existingCart));
     setQuantity(1);
     console.log(existingCart);
-    setShowSnackbar(true);
-    // Trigger the Snackbar using the context
     updateSnackBarState(true, "Added to Cart Successfully", "success");
   };
 
@@ -173,7 +170,7 @@ function ProductDetail() {
                   >
                     Add to Cart
                   </Button>
-                  {showSnackbar && <CustomSnackBar />}
+                  <CustomSnackBar />
                 </Box>
                 <Box>
                   <Typography
@@ -198,3 +195,4 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+    
