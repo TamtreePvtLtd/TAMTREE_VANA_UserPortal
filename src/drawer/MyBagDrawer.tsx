@@ -27,7 +27,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
         console.log(storedCartItems);
 
         const promises = storedCartItems.map(async (item) => {
-          const response = await axios.get(
+          const response = await axios.get<CartItem>(
             `http://localhost:3000/JewelleryItem/mybag/${item._id}`
           );
           const productData = response.data;
@@ -40,6 +40,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
               title: productData.title,
               price: productData.price,
               quantity: item.quantity,
+              inStock:productData.inStock
             };
           } else {
             throw new Error("Failed to fetch product data");
@@ -61,8 +62,14 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
     const updatedCart = cartItems.map((item) => {
       if (item._id === productId) {
         const newQuantity = item.quantity + 1;
-        updateLocalStorage(productId, newQuantity);
-        return { ...item, quantity: newQuantity };
+        if (newQuantity <= item.inStock) {
+          // If within stock limit, update the quantity and localStorage
+          updateLocalStorage(productId, newQuantity);
+          return { ...item, quantity: newQuantity };
+        } else {
+          // If exceeding stock limit, return the item without updating
+          return item;
+        }
       }
       return item;
     });
@@ -224,10 +231,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
                   )}
                 </Typography>
               </Box>
-            </>
-          )}
-        </Grid>
-        <Box
+              <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -244,6 +248,9 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             Proceed to Checkout
           </Button>
         </Box>
+            </>
+          )}
+        </Grid>
       </Drawer>
     </Container>
   );

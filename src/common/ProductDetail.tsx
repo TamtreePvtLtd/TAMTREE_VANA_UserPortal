@@ -22,7 +22,12 @@ function ProductDetail() {
   const productDetailQuery = useProductDetailById(productId ?? "");
 
   const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+    if (productDetails && quantity < parseInt(productDetails.inStock)) {
+      setQuantity(quantity + 1);
+    }else {
+      setShowSnackbar(true);
+    updateSnackBarState(true, "Cannot increase quantity, exceeds available stock.","error")
+    }
   };
 
   const decrementQuantity = () => {
@@ -44,12 +49,14 @@ function ProductDetail() {
   }, [productDetails]);
 
   const addToCart = () => {
+    const inStock: number = parseInt(productDetails!.inStock);
     const cartItem: CartItem = {
       _id: productId! || productDetails?._id!,
       quantity: quantity || productDetails?.quantity!,
       posterURL: "" || productDetails?.posterURL!,
       title: "" || productDetails?.title!,
       price: 0 || productDetails?.price!,
+      inStock:inStock
     };
     let existingCart: CartItem[] = JSON.parse(
       localStorage.getItem("cart") || "[]"
@@ -153,7 +160,7 @@ function ProductDetail() {
                       -
                     </Button>
                     <Button sx={{ color: "black" }}>{quantity}</Button>
-                    <Button onClick={incrementQuantity} sx={{ color: "black" }}>
+                    <Button onClick={incrementQuantity} sx={{ color: "black" }} >
                       +
                     </Button>
                   </ButtonGroup>
