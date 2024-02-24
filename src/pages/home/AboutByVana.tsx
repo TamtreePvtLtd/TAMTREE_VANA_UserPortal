@@ -65,7 +65,7 @@ function AboutByVana() {
         <Typography
           variant="h6"
           fontSize={matches ? "3vw" : "17px"}
-          fontFamily="'Crimson Text','serif'"
+          fontFamily="Open Sans,sans-serif"
           sx={{ textAlign: "center", opacity: 0.8, py: 2 }}
         >
           Jewellery consists of decorative items worn for personal adornment,
@@ -90,7 +90,7 @@ function AboutByVana() {
               fontSize: "15px",
               backgroundColor: "#bf873b",
               "&:hover": {
-                backgroundColor: "#f2733d",
+                backgroundColor: "#bf873b",
               },
             }}
           >

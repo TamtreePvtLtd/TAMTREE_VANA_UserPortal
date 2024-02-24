@@ -192,8 +192,12 @@ const CommonPage = (props: Icommonpage) => {
       </Box>
       <Grid container spacing={3}>
         {sortedProducts.slice(0, visibleProducts).map((product: IProduct) => (
-          <Grid item key={product._id} xs={6} sm={6} md={4} lg={3}>
-            <CommonProductCard product={product} />
+          <Grid item key={product._id} xs={6} sm={6} md={4} lg={3} >
+              <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+        <Box mx={2} width="100%"> 
+          <CommonProductCard product={product} />
+        </Box>
+      </Box>
           </Grid>
         ))}
       </Grid>
