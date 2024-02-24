@@ -73,7 +73,7 @@ export interface CartItem {
   title: string;
   price: number;
   quantity: number;
-  inStock:number
+  inStock:string;
 }
 
 export interface IMyBag {

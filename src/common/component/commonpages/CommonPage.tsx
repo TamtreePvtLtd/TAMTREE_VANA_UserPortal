@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Icommonpage,
   IProduct,
@@ -93,6 +93,7 @@ const CommonPage = (props: Icommonpage) => {
   };
 
   return (
+    <>
     <Container sx={{ marginY: "15px" }}>
       <Box>
         <Box
@@ -205,8 +206,10 @@ const CommonPage = (props: Icommonpage) => {
           </Button>
         </Box>
       )}
-      <ScrollToTop scrollFunction={decreaseVisibleProducts} />
+      <Box>
+      <ScrollToTop scrollFunction={decreaseVisibleProducts} /></Box>
     </Container>
+    </>
   );
 };
 

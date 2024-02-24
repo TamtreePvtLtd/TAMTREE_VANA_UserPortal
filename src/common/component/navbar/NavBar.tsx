@@ -17,7 +17,7 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import NavbarDrawer from "../../../drawer/NavBarDrawer";
 import SearchDrawer from "../../../drawer/SearchDrawer";
 import Logout from "@mui/icons-material/Logout";
-import vanaLogo from "../../../../public/assets/Images to Shruthi/logo/Jewellery By Vana LOGO.png";
+import vanaLogo from "../../../../public/assets/Images to Shruthi/logo/Jewellery By Vana LOGO (1).png";
 import MyBagDrawer from "../../../drawer/MyBagDrawer";
 import { useNavigate } from "react-router";
 import { paths } from "../../../routes/path";

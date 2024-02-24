@@ -88,7 +88,7 @@ function AboutByVana() {
               borderRadius: 0,
               paddingX: 4,
               fontSize: "15px",
-              backgroundColor: "#e17c57",
+              backgroundColor: "#bf873b",
               "&:hover": {
                 backgroundColor: "#f2733d",
               },

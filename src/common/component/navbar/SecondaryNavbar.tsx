@@ -41,6 +41,7 @@ const SecondaryNavbar: React.FC = () => {
           {navItems.map((item) => (
             <Grid item key={item.text} xs="auto" fontSize={"18px"}>
               <Link
+              component={"a"}
                 href={item.link}
                 sx={{
                   textDecoration: "none",

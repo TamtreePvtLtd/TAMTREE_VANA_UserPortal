@@ -8,9 +8,10 @@ import { Container } from "@mui/material";
 import { useParams } from "react-router";
 import { useProductDetailById } from "../hooks/CustomRQHooks";
 import { CartItem } from "../interface/type";
-import CustomSnackBar from "../common/CustomSnackBar";
+// import CustomSnackBar from "../common/CustomSnackBar";
 import { useSnackBar } from "../context/SnackBarContext";
 import Slider from "react-slick";
+import CustomSnackBar from "./CustomSnackBar";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -49,14 +50,14 @@ function ProductDetail() {
   }, [productDetails]);
 
   const addToCart = () => {
-    const inStock: number = parseInt(productDetails!.inStock);
+    
     const cartItem: CartItem = {
       _id: productId! || productDetails?._id!,
       quantity: quantity || productDetails?.quantity!,
       posterURL: "" || productDetails?.posterURL!,
       title: "" || productDetails?.title!,
       price: 0 || productDetails?.price!,
-      inStock:inStock
+      inStock:""|| productDetails?.inStock!
     };
     let existingCart: CartItem[] = JSON.parse(
       localStorage.getItem("cart") || "[]"
@@ -180,7 +181,7 @@ function ProductDetail() {
                   >
                     Add to Cart
                   </Button>
-                  {showSnackbar && <CustomSnackBar />}
+                   {showSnackbar && <CustomSnackBar />} 
                 </Box>
                 <Box>
                   <Typography
