@@ -55,7 +55,7 @@ const CommonProductCard = (props: Props) => {
             objectFit: "cover",
             "&:hover": {
               transform: "scale(1.05)",
-              transition: "transform 0.3s ease",
+              // transition: "transform 1.5s ease",
             },
           }}
         />
@@ -69,12 +69,14 @@ const CommonProductCard = (props: Props) => {
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               fontFamily: "cursive",
+              fontSize: "1.0rem",
+              textAlign: "center",
             }}
             gutterBottom
           >
             {product.title}
           </Typography>
-          <Typography
+          {/* <Typography
             variant="body2"
             title={product.description}
             color="textSecondary"
@@ -88,12 +90,13 @@ const CommonProductCard = (props: Props) => {
               textOverflow: "ellipsis",
               whiteSpace: "normal",
               fontFamily: "cursive",
+              textAlign: "center"
             }}
           >
             {product.description}
-          </Typography>
+          </Typography> */}
 
-          <Typography variant="h6" color="textPrimary" fontFamily = "cursive">
+          <Typography variant="h6" color="textPrimary" fontFamily="cursive" fontSize="1.0rem" textAlign="center">
             ${product.price}
           </Typography>
         </CardContent>

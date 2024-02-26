@@ -31,26 +31,28 @@ function Footer() {
           </Typography>
         </Box>
 
-        <Grid container sx={{ gap: 3 }}>
+        <Grid container sx={{ gap: 3, justifyContent: "center", alignItems: "center" }}>
           <Grid
             container
             item
             spacing={3}
+
             sx={{
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "center",
             }}
           >
-         
-            <Grid item lg={3} md={4} xs={12} sm={5}>
+
+            <Grid item lg={3.1} md={4} xs={12} sm={5}>
               <Box sx={{ my: 1, textAlign: "center" }}>
                 <ChatBubbleIcon
                   fontSize="large"
+                  fontFamily="cursive"
                   sx={{ color: theme.palette.secondary.main }}
                 />
-                <Typography variant="h5">General Enquiries</Typography>
-                <Typography my={1}>Jewellerybyvana@gmail.com</Typography>
+                <Typography variant="h5" fontFamily="cursive">General Enquiries</Typography>
+                <Typography my={1} fontFamily="cursive">Jewellerybyvana@gmail.com</Typography>
                 <Box
                   sx={{
                     gap: 2,
@@ -62,7 +64,7 @@ function Footer() {
                 >
                   <a
                     href="mailto:Jewellerybyvana@gmail.com "
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none", color: "white", fontFamily: "cursive" }}
                   >
                     <Button
                       startIcon={<EmailIcon sx={{ color: "#0489c9" }} />}
@@ -93,17 +95,20 @@ function Footer() {
                 background: "white",
                 display: { xs: "none", md: "block" },
                 borderWidth: "1px",
+                mx: 2,
+                height: "100%",
               }}
             />
 
-            <Grid item lg={2.9} md={2.9} xs={12}>
-              <Box sx={{ my: 1, textAlign: "center" }}>
+            <Grid item lg={2.9} md={2.9} xs={12} justifyContent="center" alignItems="flex-start">
+              <Box sx={{ my: 1, textAlign: "center" }} >
                 <PhoneIcon
                   fontSize="large"
+                  fontFamily="cursive"
                   sx={{ color: theme.palette.secondary.main }}
                 />
-                <Typography variant="h5">Call us</Typography>
-                <Typography>12067308971</Typography>
+                <Typography variant="h5" fontFamily="cursive">Call us</Typography>
+                <Typography my={1}>12067308971</Typography>
                 <Box mt={1}>
                   <Link
                     to={`${import.meta.env.VITE_VANA_FACEBOOK}`}
@@ -187,16 +192,16 @@ function Footer() {
               mt: 2,
             }}
           >
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} fontFamily="cursive">
               About
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} fontFamily="cursive">
               Privacy Policy
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} fontFamily="cursive">
               Shipping & Returns
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} fontFamily="cursive">
               Terms and condition
             </Typography>
           </Grid>

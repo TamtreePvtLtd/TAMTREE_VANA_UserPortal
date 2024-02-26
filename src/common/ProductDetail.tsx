@@ -113,19 +113,19 @@ function ProductDetail() {
           >
             {productDetails ? (
               <>
-                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h5" sx={{ fontWeight: "500" }} fontFamily="cursive">
                   {productDetails.title}
                 </Typography>
-                <Typography variant="h6" sx={{ mt: 2 }}>
+                <Typography variant="h6" sx={{ mt: 2 }} fontFamily="cursive">
                   ${productDetails.price}
                 </Typography>
-                <Box sx={{ marginTop: 2 }}>
+                <Box sx={{ marginTop: 2 }} fontFamily="cursive">
                   <Divider />
                 </Box>
                 <Box>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: "bold", marginTop: 1 }}
+                    sx={{ fontWeight: "500", marginTop: 1, fontFamily: "cursive" }}
                   >
                     Quantity:
                   </Typography>
@@ -167,6 +167,7 @@ function ProductDetail() {
                       backgroundColor: "#e17c57",
                       "&:hover": {
                         backgroundColor: "#f2733d",
+                        fontFamily: "cursive"
                       },
                     }}
                     onClick={addToCart}
@@ -178,7 +179,8 @@ function ProductDetail() {
                 <Box>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: "bold", marginTop: 2 }}
+                    sx={{ fontWeight: "500", marginTop: 2, fontFamily: "cursive" }}
+
                   >
                     Description:
                   </Typography>
