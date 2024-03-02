@@ -12,6 +12,7 @@ import { CartItem } from "../interface/type";
 import { useSnackBar } from "../context/SnackBarContext";
 import Slider from "react-slick";
 import CustomSnackBar from "./CustomSnackBar";
+import { useCommonFontStyle } from "../styles/fontstyle";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -19,8 +20,8 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const { updateSnackBarState } = useSnackBar();
   const [showSnackbar, setShowSnackbar] = useState(false);
-
   const productDetailQuery = useProductDetailById(productId ?? "");
+  const classes = useCommonFontStyle();
 
   const incrementQuantity = () => {
     if (productDetails && quantity < parseInt(productDetails.inStock)) {
@@ -121,19 +122,23 @@ function ProductDetail() {
           >
             {productDetails ? (
               <>
-                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                <Box className={classes.commonFontStyle}>
+                <Typography variant="h5" sx={{ fontWeight: "700" }} className={classes.commonFontStyle} >
                   {productDetails.title}
-                </Typography>
+                  </Typography>
+                </Box>
+                <Box className={classes.commonFontStyle}>
                 <Typography variant="h6" sx={{ mt: 2 }}>
                   ${productDetails.price}
-                </Typography>
-                <Box sx={{ marginTop: 2 }}>
+                  </Typography>
+                </Box>
+                <Box sx={{ marginTop: 2 }} >
                   <Divider />
                 </Box>
-                <Box>
+                <Box className={classes.commonFontStyle}>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: "bold", marginTop: 1 }}
+                    sx={{ fontWeight: "500", marginTop: 1, }}
                   >
                     Quantity:
                   </Typography>
@@ -175,6 +180,7 @@ function ProductDetail() {
                       backgroundColor: "#e17c57",
                       "&:hover": {
                         backgroundColor: "#f2733d",
+                        fontFamily: "cursive"
                       },
                     }}
                     onClick={addToCart}
@@ -183,10 +189,11 @@ function ProductDetail() {
                   </Button>
                    {showSnackbar && <CustomSnackBar />} 
                 </Box>
-                <Box>
+                <Box className={classes.commonFontStyle}>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: "bold", marginTop: 2 }}
+                    sx={{ fontWeight: "500", marginTop: 2, }}
+
                   >
                     Description:
                   </Typography>
