@@ -8,9 +8,10 @@ import { Container } from "@mui/material";
 import { useParams } from "react-router";
 import { useProductDetailById } from "../hooks/CustomRQHooks";
 import { CartItem } from "../interface/type";
-import CustomSnackBar from "../common/CustomSnackBar";
+// import CustomSnackBar from "../common/CustomSnackBar";
 import { useSnackBar } from "../context/SnackBarContext";
 import Slider from "react-slick";
+import CustomSnackBar from "./CustomSnackBar";
 import { useCommonFontStyle } from "../styles/fontstyle";
 
 function ProductDetail() {
@@ -23,7 +24,12 @@ function ProductDetail() {
   const classes = useCommonFontStyle();
 
   const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+    if (productDetails && quantity < parseInt(productDetails.inStock)) {
+      setQuantity(quantity + 1);
+    }else {
+      setShowSnackbar(true);
+    updateSnackBarState(true, "Cannot increase quantity, exceeds available stock.","error")
+    }
   };
 
   const decrementQuantity = () => {
@@ -45,12 +51,14 @@ function ProductDetail() {
   }, [productDetails]);
 
   const addToCart = () => {
+    
     const cartItem: CartItem = {
       _id: productId! || productDetails?._id!,
       quantity: quantity || productDetails?.quantity!,
       posterURL: "" || productDetails?.posterURL!,
       title: "" || productDetails?.title!,
       price: 0 || productDetails?.price!,
+      inStock:""|| productDetails?.inStock!
     };
     let existingCart: CartItem[] = JSON.parse(
       localStorage.getItem("cart") || "[]"
@@ -158,7 +166,7 @@ function ProductDetail() {
                       -
                     </Button>
                     <Button sx={{ color: "black" }}>{quantity}</Button>
-                    <Button onClick={incrementQuantity} sx={{ color: "black" }}>
+                    <Button onClick={incrementQuantity} sx={{ color: "black" }} >
                       +
                     </Button>
                   </ButtonGroup>
@@ -179,7 +187,7 @@ function ProductDetail() {
                   >
                     Add to Cart
                   </Button>
-                  {showSnackbar && <CustomSnackBar />}
+                   {showSnackbar && <CustomSnackBar />} 
                 </Box>
                 <Box className={classes.commonFontStyle}>
                   <Typography

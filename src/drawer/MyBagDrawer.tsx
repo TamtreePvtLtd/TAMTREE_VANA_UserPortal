@@ -11,12 +11,17 @@ import useStyles from "../styles/cartDrawer";
 import { CartItem, MyBagDrawerProps } from "../interface/type";
 import { useNavigate } from "react-router";
 import { Box } from "@mui/material";
+import { useSnackBar } from "../context/SnackBarContext";
+import CustomSnackBar from "../common/CustomSnackBar";
 
 const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   const classes = useStyles();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const navigate = useNavigate();
+  const { updateSnackBarState } = useSnackBar();
+  const [showSnackbar, setShowSnackbar] = useState(false);
   const [activeStep, setActiveStep] = useState(0); // Set the initial active step for the vertical stepper
+  
 
   useEffect(() => {
     const fetchCartDetails = async () => {
@@ -27,11 +32,14 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
         console.log(storedCartItems);
 
         const promises = storedCartItems.map(async (item) => {
-          const response = await axios.get(
+          const response = await axios.get<CartItem>(
             `http://localhost:3000/JewelleryItem/mybag/${item._id}`
           );
           const productData = response.data;
           console.log(productData);
+          console.log(productData.inStock!);
+          
+
 
           if (response.status === 200 && productData) {
             return {
@@ -40,6 +48,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
               title: productData.title,
               price: productData.price,
               quantity: item.quantity,
+              inStock:productData.inStock
             };
           } else {
             throw new Error("Failed to fetch product data");
@@ -61,13 +70,23 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
     const updatedCart = cartItems.map((item) => {
       if (item._id === productId) {
         const newQuantity = item.quantity + 1;
-        updateLocalStorage(productId, newQuantity);
-        return { ...item, quantity: newQuantity };
+        if (newQuantity <= parseInt(item.inStock)) {
+          // If within stock limit, update the quantity and localStorage
+          updateLocalStorage(productId, newQuantity);
+          console.log(`Quantity incremented for product ${productId}`);
+          return { ...item, quantity: newQuantity };
+        } else {
+          console.log(`Exceeded stock limit for product ${productId}`);
+          setShowSnackbar(true)
+          updateSnackBarState(true, "Cannot increase quantity, exceeds available stock.","error")
+          return item;
+        }
       }
       return item;
     });
     setCartItems(updatedCart);
   };
+  
 
   const handleDecrement = (productId: string) => {
     const updatedCart = cartItems.map((item) => {
@@ -86,10 +105,17 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
   };
 
   const handleRemove = (productId: string) => {
+    // Filter out the item with the given productId from the cartItems
     const updatedCart = cartItems.filter((item) => item._id !== productId);
-    setCartItems(updatedCart);
-    updateLocalStorage(productId, 0);
+    setCartItems(updatedCart); // Update the state to reflect the removed item
+  
+    // Remove the item with the given productId from the local storage
+    const updatedLocalStorage = updatedCart.map((item) => {
+      return { _id: item._id, quantity: item.quantity };
+    });
+    localStorage.setItem("cart", JSON.stringify(updatedLocalStorage));
   };
+  
 
   const updateLocalStorage = (productId: string, quantity: number) => {
     const storedCartItems: CartItem[] = JSON.parse(
@@ -121,7 +147,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
         >
           <Grid container item className={classes.drawerHeader}>
             <Typography variant="h6" sx={{ mb: "30px" }}>
-              My Bag
+            {activeStep === 0 && "My Bag" }
             </Typography>
             <IconButton onClick={onClose}>
               <CloseIcon />
@@ -224,10 +250,7 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
                   )}
                 </Typography>
               </Box>
-            </>
-          )}
-        </Grid>
-        <Box
+              <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -244,7 +267,11 @@ const MyBagDrawer = ({ open, onClose }: MyBagDrawerProps) => {
             Proceed to Checkout
           </Button>
         </Box>
+            </>
+          )}
+        </Grid>
       </Drawer>
+     {showSnackbar && <CustomSnackBar />}
     </Container>
   );
 };

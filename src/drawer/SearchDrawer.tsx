@@ -9,7 +9,6 @@ import { Card, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { paths } from "../routes/path";
 
 interface SearchDrawerProps {
   open: boolean;
@@ -50,7 +49,7 @@ const SearchDrawer = ({ open, onClose }: SearchDrawerProps) => {
   }, [searchTerm, open]);
 
   const handleProductClick = (productId: string) => {
-    navigate(`${paths.PRODUCTDETAIL_BASE}/${productId}`);
+    navigate(`/detail/${productId}`);
     onClose();
   };
 

@@ -15,6 +15,8 @@ import { ILogin } from "../interface/type";
 import { paths } from "../routes/path";
 import { useAuthContext } from "../context/AuthContext";
 import { LoginCredentials } from "../services/api";
+import { useState } from "react";
+import CustomSnackBar from "./CustomSnackBar";
 
 interface LoginProps {
   onLogin?(): void;
@@ -36,6 +38,7 @@ const schema = yup.object().shape({
 function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
   const { updateUserData } = useAuthContext();
     const { updateSnackBarState } = useSnackBar();
+    const [showSnackbar, setShowSnackbar] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,12 +65,13 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
         if (response.data) {
           updateUserData({
             ...response.data,
+            
           });
           if (isFromNavbar) {
             navigate(paths.ROOT);
           }
           if (isFromOrders) {
-            navigate(`/${paths.ORDERS}`);
+            navigate(paths.ORDERS);
           }
           if (isFromSignup) {
             navigate(paths.ROOT);
@@ -77,9 +81,13 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
         } else {
           updateUserData(null);
         }
+        setShowSnackbar(true)
+        updateSnackBarState(true, "Login Successful", "success")
       })
       .catch((error) => {
         if (error.response && error.response.data) {
+          setShowSnackbar(true)
+          updateSnackBarState(true, "Login failed", "error") 
         }
       });
       console.log("Resetting form...");
@@ -177,6 +185,7 @@ function Login({ onLogin, requiredHeading, onRegisterLinkClick }: LoginProps) {
             </FormHelperText>
           </form>
         </Box>
+       {showSnackbar && <CustomSnackBar />} 
       </Box>
     </>
   );
