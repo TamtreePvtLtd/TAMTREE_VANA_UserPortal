@@ -13,44 +13,46 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import theme from "../theme/theme";
 import { Link } from "react-router-dom";
+import { useCommonFontStyle } from "../styles/fontstyle";
 
 function Footer() {
   const mobilescreen = useMediaQuery("(max-width:700px)");
+  const classes = useCommonFontStyle();
 
   return (
     <Box sx={{ backgroundColor: "#f5f0ec", marginTop: 0 }}>
       <Box>
-        <Box sx={{ display: "flex", justifyContent: "center", py: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", py: 3 }} className={classes.commonFontStyle}>
           <Typography
             variant="h4"
             fontWeight={500}
-            fontFamily="cursive"
             fontSize="30px"
           >
             Contact Us
           </Typography>
         </Box>
 
-        <Grid container sx={{ gap: 3 }}>
+        <Grid container sx={{ gap: 3, justifyContent: "center", alignItems: "center" }}>
           <Grid
             container
             item
             spacing={3}
+
             sx={{
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "center",
             }}
           >
-         
-            <Grid item lg={3} md={4} xs={12} sm={5}>
-              <Box sx={{ my: 1, textAlign: "center" }}>
+
+            <Grid item lg={3.1} md={4} xs={12} sm={5}>
+              <Box sx={{ my: 1, textAlign: "center" }} className={classes.commonFontStyle}>
                 <ChatBubbleIcon
                   fontSize="large"
                   sx={{ color: theme.palette.secondary.main }}
                 />
-                <Typography variant="h5">General Enquiries</Typography>
-                <Typography my={1}>Jewellerybyvana@gmail.com</Typography>
+                <Typography variant="h5" >General Enquiries</Typography>
+                <Typography my={1} >Jewellerybyvana@gmail.com</Typography>
                 <Box
                   sx={{
                     gap: 2,
@@ -62,7 +64,7 @@ function Footer() {
                 >
                   <a
                     href="mailto:Jewellerybyvana@gmail.com "
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none", color: "white", }}
                   >
                     <Button
                       startIcon={<EmailIcon sx={{ color: "#0489c9" }} />}
@@ -93,17 +95,20 @@ function Footer() {
                 background: "white",
                 display: { xs: "none", md: "block" },
                 borderWidth: "1px",
+                mx: 2,
+                height: "100%",
               }}
             />
 
-            <Grid item lg={2.9} md={2.9} xs={12}>
-              <Box sx={{ my: 1, textAlign: "center" }}>
+            <Grid item lg={2.9} md={2.9} xs={12} justifyContent="center" alignItems="flex-start">
+              <Box sx={{ my: 1, textAlign: "center" }} className={classes.commonFontStyle} >
                 <PhoneIcon
                   fontSize="large"
+
                   sx={{ color: theme.palette.secondary.main }}
                 />
-                <Typography variant="h5">Call us</Typography>
-                <Typography>12067308971</Typography>
+                <Typography variant="h5" >Call us</Typography>
+                <Typography my={1}>12067308971</Typography>
                 <Box mt={1}>
                   <Link
                     to={`${import.meta.env.VITE_VANA_FACEBOOK}`}
@@ -185,20 +190,22 @@ function Footer() {
               alignItems: "center",
               justifyContent: "center",
               mt: 2,
-            }}
+            }} className={classes.commonFontStyle}
           >
-            <Typography variant="body2" mx={2}>
+
+            <Typography variant="body2" mx={2} >
               About
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} >
               Privacy Policy
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} >
               Shipping & Returns
             </Typography>
-            <Typography variant="body2" mx={2}>
+            <Typography variant="body2" mx={2} >
               Terms and condition
             </Typography>
+
           </Grid>
         </Grid>
       </Box>
