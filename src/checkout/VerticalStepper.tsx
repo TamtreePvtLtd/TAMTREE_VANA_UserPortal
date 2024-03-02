@@ -19,12 +19,18 @@ import {
   useTheme,
 } from "@mui/material";
 import { isAuthorized } from "../services/api";
+import { useState } from "react";
 
 const VerticalStepper = () => {
   const [renderRegister, setRenderRegister] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const theme = useTheme();
   const secondaryColor = theme.palette.secondary.main;
+
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [district, setDistrict] = useState("");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,13 +49,12 @@ const VerticalStepper = () => {
       if (data) {
         setActiveStep(1);
       } else {
-        setActiveStep(0);
+        setActiveStep(0); 
       }
     } catch (error) {
       console.error("Error checking authorization:", error);
     }
   };
-
   React.useEffect(() => {
     checkIsAuthorized();
   }, []);
@@ -83,10 +88,25 @@ const VerticalStepper = () => {
           );
        
       case 1:
-        return <ShippingAddress handleNext={handleNext} />;
+        return <ShippingAddress handleNext={(
+          address,
+          phoneNumber,
+          pincode,
+          district,
+        ) => {
+          setAddress(address);
+          setPhoneNumber(phoneNumber);
+          setPincode(pincode);
+          setDistrict(district);
+          handleNext(); // Proceed to the next step
+        }} />;
 
       case 2:
-        return <AddressForm />;
+        return <AddressForm 
+        address={address}
+        phoneNumber={phoneNumber}
+        pincode={pincode}
+        district={district} />;
       default:
         return null;
     }

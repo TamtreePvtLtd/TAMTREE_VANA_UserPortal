@@ -1,8 +1,15 @@
-import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 
-function AddressForm() {
+interface IProps {
+  address: string;
+  phoneNumber: string;
+  pincode: string;
+  district: string;
+}
+
+function AddressForm(props:IProps) {
+  const { address, phoneNumber, pincode, district} = props;
    const handleOrderNowClick = () => {
      checkOrderNowValidation();
   };
