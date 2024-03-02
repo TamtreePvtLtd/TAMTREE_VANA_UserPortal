@@ -15,6 +15,9 @@ import { ISignUp } from "../interface/type";
 import { useAuthContext } from "../context/AuthContext";
 import { signUp } from "../services/api";
 import { useForm } from "react-hook-form";
+import { useSnackBar } from "../context/SnackBarContext";
+import { useState } from "react";
+import CustomSnackBar from "./CustomSnackBar";
 
 interface SignProps {
   onSign?(): void;
@@ -56,7 +59,8 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { updateUserData } = useAuthContext();
-
+  const { updateSnackBarState } = useSnackBar();
+ const [showSnackbar, setShowSnackbar] = useState(false);
   const { state } = location;
   const isNavbarLogin = state?.fromNavbarLogin || false;
   const isOrderLogin = state?.fromOrdersLogin || false;
@@ -89,6 +93,8 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
               navigate(paths.ROOT);
             }
           }
+          setShowSnackbar(true)
+          updateSnackBarState(true, "Signup Successfully", "success")
         })
         .catch((error) => {
           if (error.response && error.response.data) {
@@ -267,8 +273,11 @@ function Signup({ onSign, requiredHeading, onRegisterLinkClick }: SignProps) {
           </FormHelperText>
         </form>
       </Box>
+       {showSnackbar && <CustomSnackBar />} 
     </Container>
   );
 }
 
 export default Signup;
+
+

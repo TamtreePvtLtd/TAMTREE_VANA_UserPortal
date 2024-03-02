@@ -21,6 +21,7 @@ export interface IProductDetails {
   title: string;
   price: number;
   images: string[];
+  inStock: string;
   quantity: number;
   posterURL: string;
   description: string;
@@ -71,7 +72,8 @@ export interface CartItem {
   posterURL: string;
   title: string;
   price: number;
-  quantity: number
+  quantity: number;
+  inStock:string;
 }
 
 export interface IMyBag {
