@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {  LogOut, LoginCredentials, fetchProductDetailById, getAllItemsByCollectionName, getAllItemsById,  } from "../services/api";
+import {  LogOut, LoginCredentials, fetchProductDetailById, getAllItemsByCollectionName, getAllItemsById, getAllShippingDetail,  } from "../services/api";
 
 
 export const useGetAllItemsByCollectionName = (collectionName:string) => {
@@ -16,7 +16,14 @@ export const useGetAllItemsByCollectionName = (collectionName:string) => {
      queryFn:() => getAllItemsById(jewelleryItemsId),
       refetchOnWindowFocus: false,
     });
-  };
+};
+    export const useGetAllShippingDetail = () => {
+      return useQuery({
+        queryKey: ["getAllItemsbyId"],
+        queryFn: () => getAllShippingDetail(),
+        refetchOnWindowFocus: false,
+      });
+    };
 
   export const useProductDetailById = (productId: string) => {
     return useQuery({

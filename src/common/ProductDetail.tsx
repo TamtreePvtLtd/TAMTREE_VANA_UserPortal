@@ -19,7 +19,7 @@ function ProductDetail() {
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { updateSnackBarState } = useSnackBar();
-  const [showSnackbar, setShowSnackbar] = useState(false);
+
   const productDetailQuery = useProductDetailById(productId ?? "");
   const classes = useCommonFontStyle();
 
@@ -27,7 +27,7 @@ function ProductDetail() {
     if (productDetails && quantity < parseInt(productDetails.inStock)) {
       setQuantity(quantity + 1);
     }else {
-      setShowSnackbar(true);
+      // setShowSnackbar(true);
     updateSnackBarState(true, "Cannot increase quantity, exceeds available stock.","error")
     }
   };
@@ -74,7 +74,7 @@ function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(existingCart));
     setQuantity(1);
     console.log(existingCart);
-    setShowSnackbar(true);
+   
     // Trigger the Snackbar using the context
     updateSnackBarState(true, "Added to Cart Successfully", "success");
   };
@@ -187,7 +187,7 @@ function ProductDetail() {
                   >
                     Add to Cart
                   </Button>
-                   {showSnackbar && <CustomSnackBar />} 
+                   <CustomSnackBar />
                 </Box>
                 <Box className={classes.commonFontStyle}>
                   <Typography

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,8 +6,12 @@ import {
   TextField,
   FormHelperText,
   Button,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useGetAllShippingDetail } from "../hooks/CustomRQHooks";
+import theme from "../theme/theme";
 
 interface FormData {
   address: string;
@@ -25,6 +29,11 @@ function ShippingAddress({ handleNext }: ShippingAddressProps) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [selectedShippingOption, setSelectedShippingOption] = useState("");
+  const { data: shippingDetails } = useGetAllShippingDetail();
+  const handleShippingOptionChange = (event) => {
+    setSelectedShippingOption(event.target.value);
+  };
 
   const onSubmit = (data: any) => {
     const formData: FormData = {
@@ -34,9 +43,8 @@ function ShippingAddress({ handleNext }: ShippingAddressProps) {
       district: data.district,
     };
     console.log(formData);
-     handleNext(); 
+    handleNext();
   };
-  
 
   return (
     <Box mt={1}>
@@ -114,6 +122,40 @@ function ShippingAddress({ handleNext }: ShippingAddressProps) {
               //   helperText={errors.district?.message}
             />
           </Grid>
+          {shippingDetails && (
+            <Grid item xs={12}>
+              <Typography>
+                Shipping<span style={{ color: "red" }}>*</span>
+              </Typography>
+              <Select
+                variant="outlined"
+                sx={{
+                  width: 250,
+                  height: 50,
+                  "& .MuiSelect-select": {
+                    color: "black !important",
+                  },
+                  "&:focus": {
+                    borderColor: "black !important",
+                  },
+                  "& .MuiSelect-iconOutlined, & .MuiSelect-iconFilled": {
+                    color: "black !important",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "black !important",
+                  },
+                }}
+                value={selectedShippingOption}
+                onChange={handleShippingOptionChange}
+              >
+                {shippingDetails.map((shippingOption) => (
+                  <MenuItem key={shippingOption._id} value={shippingOption._id}>
+                    {shippingOption.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <Button
               variant="contained"

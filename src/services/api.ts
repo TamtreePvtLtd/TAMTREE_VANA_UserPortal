@@ -40,6 +40,16 @@ const getNewArrivalProductsData = async () => {
   }
 };
 
+const getAllShippingDetail= async () => {
+  try {
+    const response = await httpWithoutCredentials.get<IProduct[]>(
+      "/Shipping/getAllShippingDetails"
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 const fetchProductDetailById = async (productId: string) => {
   try {
     var response = await httpWithoutCredentials.get<IProductDetails>(
@@ -51,7 +61,13 @@ const fetchProductDetailById = async (productId: string) => {
   }
 };
 
-export { getNewArrivalProductsData, getAllItemsByCollectionName, getAllItemsById,fetchProductDetailById };
+export {
+  getNewArrivalProductsData,
+  getAllItemsByCollectionName,
+  getAllItemsById,
+  fetchProductDetailById,
+  getAllShippingDetail,
+};
 
 
 
@@ -98,6 +114,7 @@ const signUp = async (credential: ISignUp) => {
     throw error;
   }
 };
+
 
 
 export {  signUp,LoginCredentials,LogOut,isAuthorized };
